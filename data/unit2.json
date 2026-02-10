@@ -1,0 +1,175 @@
+{
+  "unit_id": "unit2",
+  "unit_title": "Unit 2: Family and Relationships",
+  "unit_description": "家庭成員和關係稱謂",
+  "difficulty": "beginner",
+  "words": [
+    {
+      "id": "unit2-word1",
+      "english": "family",
+      "translation": "家庭",
+      "hint": "noun",
+      "audio": "family"
+    },
+    {
+      "id": "unit2-word2",
+      "english": "father",
+      "translation": "父親；爸爸",
+      "hint": "noun",
+      "audio": "father"
+    },
+    {
+      "id": "unit2-word3",
+      "english": "mother",
+      "translation": "母親；媽媽",
+      "hint": "noun",
+      "audio": "mother"
+    },
+    {
+      "id": "unit2-word4",
+      "english": "brother",
+      "translation": "兄弟；哥哥/弟弟",
+      "hint": "noun",
+      "audio": "brother"
+    },
+    {
+      "id": "unit2-word5",
+      "english": "sister",
+      "translation": "姐妹；姐姐/妹妹",
+      "hint": "noun",
+      "audio": "sister"
+    },
+    {
+      "id": "unit2-word6",
+      "english": "grandfather",
+      "translation": "祖父；爺爺/外公",
+      "hint": "noun",
+      "audio": "grandfather"
+    },
+    {
+      "id": "unit2-word7",
+      "english": "grandmother",
+      "translation": "祖母；奶奶/外婆",
+      "hint": "noun",
+      "audio": "grandmother"
+    },
+    {
+      "id": "unit2-word8",
+      "english": "uncle",
+      "translation": "叔叔；舅舅；姑父",
+      "hint": "noun",
+      "audio": "uncle"
+    },
+    {
+      "id": "unit2-word9",
+      "english": "aunt",
+      "translation": "阿姨；姑姑；舅媽",
+      "hint": "noun",
+      "audio": "aunt"
+    },
+    {
+      "id": "unit2-word10",
+      "english": "cousin",
+      "translation": "堂/表兄弟姐妹",
+      "hint": "noun",
+      "audio": "cousin"
+    },
+    {
+      "id": "unit2-word11",
+      "english": "parents",
+      "translation": "父母",
+      "hint": "noun",
+      "audio": "parents"
+    },
+    {
+      "id": "unit2-word12",
+      "english": "child",
+      "translation": "孩子；兒童",
+      "hint": "noun",
+      "audio": "child"
+    },
+    {
+      "id": "unit2-word13",
+      "english": "husband",
+      "translation": "丈夫",
+      "hint": "noun",
+      "audio": "husband"
+    },
+    {
+      "id": "unit2-word14",
+      "english": "wife",
+      "translation": "妻子",
+      "hint": "noun",
+      "audio": "wife"
+    },
+    {
+      "id": "unit2-word15",
+      "english": "nephew",
+      "translation": "侄子；外甥",
+      "hint": "noun",
+      "audio": "nephew"
+    }
+  ],
+  "sentences": [
+    {
+      "id": "unit2-sent1",
+      "english": "This is my family.",
+      "translation": "這是我的家庭。",
+      "audio": "sentence1"
+    },
+    {
+      "id": "unit2-sent2",
+      "english": "My father is a teacher and my mother is a nurse.",
+      "translation": "我的爸爸是老師，媽媽是護士。",
+      "audio": "sentence2"
+    },
+    {
+      "id": "unit2-sent3",
+      "english": "I have one brother and two sisters.",
+      "translation": "我有一個弟弟和兩個姐姐。",
+      "audio": "sentence3"
+    },
+    {
+      "id": "unit2-sent4",
+      "english": "My grandfather and grandmother live in the countryside.",
+      "translation": "我的爺爺和奶奶住在鄉下。",
+      "audio": "sentence4"
+    },
+    {
+      "id": "unit2-sent5",
+      "english": "My uncle is my father's brother.",
+      "translation": "我的叔叔是我爸爸的弟弟。",
+      "audio": "sentence5"
+    },
+    {
+      "id": "unit2-sent6",
+      "english": "Her aunt is a doctor in a big hospital.",
+      "translation": "她的姑姑是一家大醫院的醫生。",
+      "audio": "sentence6"
+    },
+    {
+      "id": "unit2-sent7",
+      "english": "My cousin and I go to the same school.",
+      "translation": "我的堂兄和我就讀同一所學校。",
+      "audio": "sentence7"
+    },
+    {
+      "id": "unit2-sent8",
+      "english": "My parents love my little nephew very much.",
+      "translation": "我的父母非常疼我的小外甥。",
+      "audio": "sentence8"
+    },
+    {
+      "id": "unit2-sent9",
+      "english": "My husband's sister is my sister-in-law.",
+      "translation": "我丈夫的妹妹是我的小姑子。",
+      "audio": "sentence9"
+    },
+    {
+      "id": "unit2-sent10",
+      "english": "We have a happy family with ten members.",
+      "translation": "我們有一個有十個成員的幸福家庭。",
+      "audio": "sentence10"
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "unit_id": "unit1",
+  "unit_title": "Unit 1: Greetings and Introductions",
+  "unit_description": "基礎問候和自我介紹用語",
+  "difficulty": "beginner",
+  "words": [
+    {
+      "id": "unit1-word1",
+      "english": "hello",
+      "translation": "你好",
+      "hint": "interjection",
+      "audio": "hello"
+    },
+    {
+      "id": "unit1-word2",
+      "english": "hi",
+      "translation": "嗨",
+      "hint": "interjection",
+      "audio": "hi"
+    },
+    {
+      "id": "unit1-word3",
+      "english": "name",
+      "translation": "名字",
+      "hint": "noun",
+      "audio": "name"
+    },
+    {
+      "id": "unit1-word4",
+      "english": "my",
+      "translation": "我的",
+      "hint": "adjective",
+      "audio": "my"
+    },
+    {
+      "id": "unit1-word5",
+      "english": "your",
+      "translation": "你的；你們的",
+      "hint": "adjective",
+      "audio": "your"
+    },
+    {
+      "id": "unit1-word6",
+      "english": "nice",
+      "translation": "美好的；友好的",
+      "hint": "adjective",
+      "audio": "nice"
+    },
+    {
+      "id": "unit1-word7",
+      "english": "meet",
+      "translation": "遇見；認識",
+      "hint": "verb",
+      "audio": "meet"
+    },
+    {
+      "id": "unit1-word8",
+      "english": "goodbye",
+      "translation": "再見",
+      "hint": "interjection",
+      "audio": "goodbye"
+    },
+    {
+      "id": "unit1-word9",
+      "english": "morning",
+      "translation": "早上",
+      "hint": "noun",
+      "audio": "morning"
+    },
+    {
+      "id": "unit1-word10",
+      "english": "afternoon",
+      "translation": "下午",
+      "hint": "noun",
+      "audio": "afternoon"
+    },
+    {
+      "id": "unit1-word11",
+      "english": "thanks",
+      "translation": "謝謝",
+      "hint": "interjection",
+      "audio": "thanks"
+    },
+    {
+      "id": "unit1-word12",
+      "english": "please",
+      "translation": "請",
+      "hint": "interjection",
+      "audio": "please"
+    }
+  ],
+  "sentences": [
+    {
+      "id": "unit1-sent1",
+      "english": "Hello! My name is Anna.",
+      "translation": "你好！我的名字是安娜。",
+      "audio": "sentence1"
+    },
+    {
+      "id": "unit1-sent2",
+      "english": "Hi! What is your name?",
+      "translation": "嗨！你叫什麼名字？",
+      "audio": "sentence2"
+    },
+    {
+      "id": "unit1-sent3",
+      "english": "Nice to meet you!",
+      "translation": "很高興認識你！",
+      "audio": "sentence3"
+    },
+    {
+      "id": "unit1-sent4",
+      "english": "Good morning! How are you?",
+      "translation": "早上好！你好嗎？",
+      "audio": "sentence4"
+    },
+    {
+      "id": "unit1-sent5",
+      "english": "Good afternoon! Thank you very much.",
+      "translation": "下午好！非常感謝你。",
+      "audio": "sentence5"
+    },
+    {
+      "id": "unit1-sent6",
+      "english": "Please call me Tom.",
+      "translation": "請叫我湯姆。",
+      "audio": "sentence6"
+    },
+    {
+      "id": "unit1-sent7",
+      "english": "Goodbye! See you tomorrow.",
+      "translation": "再見！明天見。",
+      "audio": "sentence7"
+    },
+    {
+      "id": "unit1-sent8",
+      "english": "My name is Li Ming, nice to meet you.",
+      "translation": "我的名字是李明，很高興認識你。",
+      "audio": "sentence8"
+    }
+  ]
+}
