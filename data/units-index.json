@@ -1,0 +1,31 @@
+{
+  "units": [
+    {
+      "id": "unit1",
+      "title": "Unit 1: Greetings and Introductions",
+      "description": "基礎問候和自我介紹用語",
+      "words_count": 12,
+      "sentences_count": 8,
+      "difficulty": "beginner",
+      "created": "2023-09-01"
+    },
+    {
+      "id": "unit2",
+      "title": "Unit 2: Family and Relationships",
+      "description": "家庭成員和關係稱謂",
+      "words_count": 15,
+      "sentences_count": 10,
+      "difficulty": "beginner",
+      "created": "2023-09-15"
+    },
+    {
+      "id": "unit5",
+      "title": "Unit 5: The World of Gadgets",
+      "description": "科技產品和數碼詞彙",
+      "words_count": 10,
+      "sentences_count": 6,
+      "difficulty": "intermediate",
+      "created": "2023-10-20"
+    }
+  ]
+}

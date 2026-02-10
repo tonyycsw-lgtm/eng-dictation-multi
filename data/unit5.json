@@ -1,0 +1,116 @@
+{
+  "unit_id": "unit5",
+  "unit_title": "Unit 5: The World of Gadgets",
+  "unit_description": "科技產品和數碼詞彙",
+  "difficulty": "intermediate",
+  "words": [
+    {
+      "id": "unit5-word1",
+      "english": "short",
+      "translation": "短的；矮的",
+      "hint": "adjective",
+      "audio": "short"
+    },
+    {
+      "id": "unit5-word2",
+      "english": "new",
+      "translation": "新的",
+      "hint": "adjective",
+      "audio": "new"
+    },
+    {
+      "id": "unit5-word3",
+      "english": "fun",
+      "translation": "樂趣；趣事",
+      "hint": "noun",
+      "audio": "fun"
+    },
+    {
+      "id": "unit5-word4",
+      "english": "less",
+      "translation": "更少的",
+      "hint": "adjective",
+      "audio": "less"
+    },
+    {
+      "id": "unit5-word5",
+      "english": "long",
+      "translation": "長的；長久的",
+      "hint": "adjective",
+      "audio": "long"
+    },
+    {
+      "id": "unit5-word6",
+      "english": "small",
+      "translation": "小的",
+      "hint": "adjective",
+      "audio": "small"
+    },
+    {
+      "id": "unit5-word7",
+      "english": "more",
+      "translation": "更多的",
+      "hint": "adjective",
+      "audio": "more"
+    },
+    {
+      "id": "unit5-word8",
+      "english": "photos",
+      "translation": "照片",
+      "hint": "noun",
+      "audio": "photos"
+    },
+    {
+      "id": "unit5-word9",
+      "english": "best",
+      "translation": "最好的",
+      "hint": "adjective",
+      "audio": "best"
+    },
+    {
+      "id": "unit5-word10",
+      "english": "movies",
+      "translation": "電影",
+      "hint": "noun",
+      "audio": "movies"
+    }
+  ],
+  "sentences": [
+    {
+      "id": "unit5-sent1",
+      "english": "Old cameras are better than digital cameras.",
+      "translation": "舊相機比數碼相機更好。",
+      "audio": "sentence1"
+    },
+    {
+      "id": "unit5-sent2",
+      "english": "They agree that modern machines are better.",
+      "translation": "他們同意現代機器更好。",
+      "audio": "sentence2"
+    },
+    {
+      "id": "unit5-sent3",
+      "english": "Digital cameras are more convenient.",
+      "translation": "數碼相機更方便。",
+      "audio": "sentence3"
+    },
+    {
+      "id": "unit5-sent4",
+      "english": "This gadget makes life easier.",
+      "translation": "這個小工具讓生活更輕鬆。",
+      "audio": "sentence4"
+    },
+    {
+      "id": "unit5-sent5",
+      "english": "Modern technology helps us communicate.",
+      "translation": "現代科技幫助我們溝通。",
+      "audio": "sentence5"
+    },
+    {
+      "id": "unit5-sent6",
+      "english": "Smartphones are useful gadgets.",
+      "translation": "智能手機是有用的小工具。",
+      "audio": "sentence6"
+    }
+  ]
+}
