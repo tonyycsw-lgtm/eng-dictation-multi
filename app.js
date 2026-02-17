@@ -334,7 +334,7 @@ function flipCard(card) {
     if (card.classList.contains('flipped')) {
         updateButtonsState(cardId);
         
-        // 檢查是否已經播放過（可選）
+        // 檢查是否已經播放過（只自動播放一次）
         if (!card.dataset.audioPlayed) {
             const audioBtn = card.querySelector('.audio-btn');
             if (audioBtn && !audioBtn.disabled) {
@@ -342,7 +342,9 @@ function flipCard(card) {
                 const match = onclickAttr && onclickAttr.match(/playAudio\('([^']+)'/);
                 if (match && match[1]) {
                     const audioKey = match[1];
-                    audioPlayer.playAudio(audioKey, audioBtn, { stopPropagation: () => {} });
+                    // 建立模擬事件物件，避免 stopPropagation 出錯
+                    const mockEvent = { stopPropagation: () => {}, preventDefault: () => {} };
+                    audioPlayer.playAudio(audioKey, audioBtn, mockEvent);
                     card.dataset.audioPlayed = 'true'; // 標記已播放
                 }
             }
@@ -350,6 +352,7 @@ function flipCard(card) {
     } else {
         disableButtons(cardId);
         
+        // 翻回正面時停止播放
         if (audioPlayer.isPlaying) {
             audioPlayer.stopCurrentAudio();
         }
@@ -450,7 +453,7 @@ function updateStats() {
     document.getElementById('mastered-sentences').textContent = masteredSentences;
     document.getElementById('sentences-mastery').textContent = sentencesMastery + '%';
     
-    // 更新詳細統計彈窗內容 (函數保留)
+    // 更新詳細統計彈窗內容
     updateUnitStatsDisplay();
 }
 
@@ -616,6 +619,8 @@ function resetCurrentTabData(event) {
     updateStats();
     document.querySelectorAll('.flashcard').forEach(card => {
         card.classList.remove('flipped');
+        // 清除 audioPlayed 標記，讓卡片可以再次自動播放
+        delete card.dataset.audioPlayed;
         const id = getCardId(card);
         if (id) disableButtons(id);
     });
@@ -634,6 +639,8 @@ function resetAllUnitsData(event) {
         updateStats();
         document.querySelectorAll('.flashcard').forEach(card => {
             card.classList.remove('flipped');
+            // 清除 audioPlayed 標記，讓卡片可以再次自動播放
+            delete card.dataset.audioPlayed;
             const id = getCardId(card);
             if (id) disableButtons(id);
         });
