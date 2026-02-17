@@ -330,10 +330,27 @@ function generateCards() {
 function flipCard(card) {
     card.classList.toggle('flipped');
     const cardId = getCardId(card);
+    
     if (card.classList.contains('flipped')) {
         updateButtonsState(cardId);
+        
+        // 翻到反面時自動播放音頻
+        const audioBtn = card.querySelector('.audio-btn');
+        if (audioBtn && !audioBtn.disabled) {
+            const onclickAttr = audioBtn.getAttribute('onclick');
+            const match = onclickAttr && onclickAttr.match(/playAudio\('([^']+)'/);
+            if (match && match[1]) {
+                const audioKey = match[1];
+                audioPlayer.playAudio(audioKey, audioBtn, { stopPropagation: () => {} });
+            }
+        }
     } else {
         disableButtons(cardId);
+        
+        // 翻回正面時停止播放
+        if (audioPlayer.isPlaying) {
+            audioPlayer.stopCurrentAudio();
+        }
     }
 }
 
