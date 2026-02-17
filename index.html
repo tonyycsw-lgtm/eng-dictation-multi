@@ -497,6 +497,11 @@
         
         .card-front .card-content {
             color: white;
+    	    display: flex;
+    	    flex-direction: column;
+	    align-items: center;
+	    justify-content: center;
+	    flex: 1
         }
         
         .answer-text {
@@ -536,14 +541,14 @@
         
         .stars-container {
             display: flex;
-            gap: 6px;
-            margin: 12px 0;
+            gap: 4px;
+            margin: 8px 0;
             flex-wrap: wrap;
             justify-content: center;
         }
         
         .star {
-            font-size: 24px;
+            font-size: 18px; /* 從 24px 改為 18px */
             color: rgba(255, 255, 255, 0.4);
             user-select: none;
         }
