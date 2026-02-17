@@ -20,7 +20,6 @@ class StableAudioPlayer {
         this.currentUtterance = null;
         this.isPlaying = false;
         this.isStopping = false;
-        
         this.warmUpTTS();
     }
     
@@ -31,136 +30,80 @@ class StableAudioPlayer {
                 utterance.volume = 0;
                 speechSynthesis.speak(utterance);
                 setTimeout(() => speechSynthesis.cancel(), 100);
-                console.log('TTS 引擎預熱成功');
-            } catch (e) {
-                console.log('TTS 預熱失敗，但仍然可用');
-            }
-        } else {
-            console.warn('瀏覽器不支持 SpeechSynthesis API');
+            } catch (e) {}
         }
     }
     
     stopCurrentAudio() {
         this.isStopping = true;
         this.isPlaying = false;
-        
         if (speechSynthesis && speechSynthesis.speaking) {
             speechSynthesis.cancel();
         }
-        
         this.currentUtterance = null;
-        
         if (this.currentAudioBtn) {
             this.currentAudioBtn.classList.remove('playing');
             this.currentAudioBtn.classList.remove('disabled');
             this.currentAudioBtn.disabled = false;
             this.currentAudioBtn = null;
         }
-        
         this.isStopping = false;
     }
     
     showAudioStatus(cardElement, message) {
-        // 保留卡片内的状态提示（不影响用户体验）
-        let statusElement = cardElement.querySelector('.audio-status');
-        if (!statusElement) {
-            statusElement = document.createElement('div');
-            statusElement.className = 'audio-status';
-            cardElement.appendChild(statusElement);
-        }
-        
-        statusElement.textContent = message;
-        statusElement.classList.remove('show');
-        void statusElement.offsetWidth;
-        statusElement.classList.add('show');
-        
-        setTimeout(() => {
-            statusElement.classList.remove('show');
-        }, 2000);
+        // 可選：簡單提示，此處省略以保持簡潔
     }
     
     async playAudio(audioKey, btn, event) {
         stopPropagation(event);
-        
-        if (this.isStopping) {
-            return;
-        }
-        
+        if (this.isStopping) return;
         if (this.currentAudioBtn === btn && this.isPlaying) {
             this.stopCurrentAudio();
             return;
         }
-        
         if (this.isPlaying && this.currentAudioBtn !== btn) {
             this.stopCurrentAudio();
             await this.sleep(100);
         }
-        
         const text = this.getTextForAudioKey(audioKey);
-        const cardElement = btn.closest('.card-front, .card-back')?.closest('.flashcard');
-        
         try {
             await this.playBrowserTTS(text, btn);
-            if (cardElement) {
-                this.showAudioStatus(cardElement, '使用瀏覽器語音');
-            }
         } catch (error) {
             console.error('音頻播放失敗:', error);
-            if (cardElement) {
-                this.showAudioStatus(cardElement, '語音播放失敗');
-            }
             this.resetButtonState(btn);
         }
     }
     
     getTextForAudioKey(audioKey) {
         if (!appData) return audioKey;
-        
         const word = appData.words.find(w => w.audio === audioKey);
         if (word) return word.english;
-        
         const sentence = appData.sentences.find(s => s.audio === audioKey);
-        if (sentence) return sentence.english;
-        
-        return audioKey;
+        return sentence ? sentence.english : audioKey;
     }
     
     playBrowserTTS(text, btn) {
         return new Promise((resolve, reject) => {
             if (!('speechSynthesis' in window)) {
-                reject(new Error('瀏覽器不支持語音合成'));
+                reject(new Error('不支持語音合成'));
                 return;
             }
-            
-            if (speechSynthesis.speaking) {
-                speechSynthesis.cancel();
-                this.sleep(50);
-            }
-            
+            if (speechSynthesis.speaking) speechSynthesis.cancel();
             this.currentUtterance = new SpeechSynthesisUtterance(text);
             this.currentUtterance.lang = 'en-GB';
             this.currentUtterance.rate = 0.85;
-            this.currentUtterance.volume = 1.0;
-            this.currentUtterance.pitch = 1.0;
             this.currentAudioBtn = btn;
             this.isPlaying = true;
-            
-            btn.classList.add('playing');
-            btn.classList.add('disabled');
+            btn.classList.add('playing', 'disabled');
             btn.disabled = true;
-            
-            this.currentUtterance.onstart = () => {
-                resolve();
-            };
-            
+            this.currentUtterance.onstart = () => resolve();
             this.currentUtterance.onerror = (event) => {
                 this.isPlaying = false;
                 this.resetButtonState(btn);
                 this.currentUtterance = null;
                 this.currentAudioBtn = null;
-                reject(new Error(`TTS錯誤: ${event.error}`));
+                reject(event);
             };
-            
             this.currentUtterance.onend = () => {
                 this.isPlaying = false;
                 this.resetButtonState(btn);
@@ -168,21 +111,13 @@ class StableAudioPlayer {
                 this.currentAudioBtn = null;
                 resolve();
             };
-            
-            setTimeout(() => {
-                try {
-                    speechSynthesis.speak(this.currentUtterance);
-                } catch (e) {
-                    reject(new Error(`TTS播放失敗: ${e.message}`));
-                }
-            }, 50);
+            setTimeout(() => speechSynthesis.speak(this.currentUtterance), 50);
         });
     }
     
     resetButtonState(btn) {
         if (btn) {
-            btn.classList.remove('playing');
-            btn.classList.remove('disabled');
+            btn.classList.remove('playing', 'disabled');
             btn.disabled = false;
         }
     }
@@ -191,6 +126,8 @@ class StableAudioPlayer {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
+
+const audioPlayer = new StableAudioPlayer();
 
 // === 輔助函數 ===
 function stopPropagation(event) {
@@ -202,85 +139,67 @@ function stopPropagation(event) {
 
 function formatDate(dateString) {
     if (!dateString) return '從未';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('zh-HK');
+    return new Date(dateString).toLocaleDateString('zh-HK');
 }
 
 function formatTime(minutes) {
-    if (minutes < 60) {
-        return `${minutes} 分鐘`;
-    } else {
-        const hours = Math.floor(minutes / 60);
-        const mins = minutes % 60;
-        return mins > 0 ? `${hours} 小時 ${mins} 分鐘` : `${hours} 小時`;
-    }
+    if (minutes < 60) return `${minutes} 分鐘`;
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return mins > 0 ? `${hours} 小時 ${mins} 分鐘` : `${hours} 小時`;
 }
 
 // === 數據管理 ===
-const audioPlayer = new StableAudioPlayer();
-
-// 加載單元索引
 async function loadUnitsIndex() {
     try {
         const response = await fetch(CONFIG.DATA_PATH + CONFIG.UNITS_INDEX);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) throw new Error();
         unitsIndex = await response.json();
         return true;
     } catch (error) {
-        console.error('加載單元索引失敗:', error);
+        console.error('加載單元索引失敗');
         unitsIndex = { units: [] };
         return false;
     }
 }
 
-// 加載單元數據
 async function loadUnitData(unitId) {
-    // 先檢查是否是上傳的單元（有 dataUrl）
     const unitInfo = unitsIndex.units.find(u => u.id === unitId);
     if (unitInfo && unitInfo.dataUrl) {
         try {
             const response = await fetch(unitInfo.dataUrl);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            if (!response.ok) throw new Error();
             appData = await response.json();
             return true;
         } catch (error) {
-            console.error(`加載上傳單元 ${unitId} 失敗:`, error);
             return false;
         }
     }
-    
-    // 否則從靜態文件加載
     try {
         const response = await fetch(`${CONFIG.DATA_PATH}${unitId}.json`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) throw new Error();
         appData = await response.json();
         return true;
     } catch (error) {
-        console.error(`加載單元 ${unitId} 失敗:`, error);
         return false;
     }
 }
 
-// 初始化星星數據
 function initStarData() {
     if (!appData) return;
-    
     const savedStarData = JSON.parse(localStorage.getItem('starData') || '{}');
     const allIds = [];
     appData.words.forEach(word => allIds.push(word.id));
     appData.sentences.forEach(sentence => allIds.push(sentence.id));
-    
     allIds.forEach(id => {
         defaultStars[id] = 0;
         starData[id] = savedStarData[id] || 0;
     });
 }
 
-// 初始化學習統計
 function initLearningStats() {
     const savedStats = JSON.parse(localStorage.getItem('learningStats') || '{}');
     learningStats = savedStats;
-    
     if (!learningStats[currentUnitId]) {
         learningStats[currentUnitId] = {
             totalTime: 0,
@@ -291,7 +210,6 @@ function initLearningStats() {
     }
 }
 
-// 更新學習統計
 function updateLearningStats() {
     if (!learningStats[currentUnitId]) {
         learningStats[currentUnitId] = {
@@ -301,39 +219,30 @@ function updateLearningStats() {
             mastery: 0
         };
     }
-    
     learningStats[currentUnitId].lastAccessed = new Date().toISOString();
     learningStats[currentUnitId].sessions = (learningStats[currentUnitId].sessions || 0) + 1;
-    
     saveLearningStats();
 }
 
-// 保存學習統計
 function saveLearningStats() {
     localStorage.setItem('learningStats', JSON.stringify(learningStats));
     updateDataStatus();
 }
 
-// 保存星星數據
 function saveStarData() {
     localStorage.setItem('starData', JSON.stringify(starData));
     updateDataStatus();
 }
 
-// 更新數據狀態指示器
 function updateDataStatus() {
     const status = document.getElementById('data-status');
     status.classList.add('saving');
-    
-    setTimeout(() => {
-        status.classList.remove('saving');
-    }, 500);
+    setTimeout(() => status.classList.remove('saving'), 500);
 }
 
-// === 卡片生成 ===
+// === 卡片生成 (簡化版正面) ===
 function generateWordCard(word, index) {
     const number = `單詞 ${index + 1}`;
-    
     return `
         <div class="card-container">
             <div class="flashcard" onclick="flipCard(this)">
@@ -341,7 +250,6 @@ function generateWordCard(word, index) {
                     <div class="card-number">${number}</div>
                     <div class="card-content">
                         <div class="stars-container" id="${word.id}-stars"></div>
-                        <div class="stars-label" id="${word.id}-label">點擊翻轉卡片</div>
                     </div>
                     <div class="audio-buttons">
                         <button class="audio-btn" onclick="audioPlayer.playAudio('${word.audio}', this, event)">
@@ -372,7 +280,6 @@ function generateWordCard(word, index) {
 
 function generateSentenceCard(sentence, index) {
     const number = `句子 ${index + 1}`;
-    
     return `
         <div class="card-container sentence-card">
             <div class="flashcard" onclick="flipCard(this)">
@@ -380,7 +287,6 @@ function generateSentenceCard(sentence, index) {
                     <div class="card-number">${number}</div>
                     <div class="card-content">
                         <div class="stars-container" id="${sentence.id}-stars"></div>
-                        <div class="stars-label" id="${sentence.id}-label">點擊翻轉卡片</div>
                     </div>
                     <div class="audio-buttons">
                         <button class="audio-btn" onclick="audioPlayer.playAudio('${sentence.audio}', this, event)">
@@ -411,74 +317,53 @@ function generateSentenceCard(sentence, index) {
 function generateCards() {
     const wordsGrid = document.getElementById('words-grid');
     if (wordsGrid && appData.words.length > 0) {
-        wordsGrid.innerHTML = appData.words.map((word, index) => 
-            generateWordCard(word, index)
-        ).join('');
+        wordsGrid.innerHTML = appData.words.map((word, index) => generateWordCard(word, index)).join('');
     }
-    
     const sentencesGrid = document.getElementById('sentences-grid');
     if (sentencesGrid && appData.sentences.length > 0) {
-        sentencesGrid.innerHTML = appData.sentences.map((sentence, index) => 
-            generateSentenceCard(sentence, index)
-        ).join('');
+        sentencesGrid.innerHTML = appData.sentences.map((sentence, index) => generateSentenceCard(sentence, index)).join('');
     }
-    
     updateStats();
 }
 
 // === 卡片操作 ===
 function flipCard(card) {
     card.classList.toggle('flipped');
-    
+    const cardId = getCardId(card);
     if (card.classList.contains('flipped')) {
-        const cardId = getCardId(card);
         updateButtonsState(cardId);
     } else {
-        const cardId = getCardId(card);
         disableButtons(cardId);
     }
 }
 
 function getCardId(cardElement) {
     const starsContainer = cardElement.querySelector('.stars-container');
-    if (starsContainer && starsContainer.id) {
-        return starsContainer.id.replace('-stars', '');
-    }
-    return null;
+    return starsContainer && starsContainer.id ? starsContainer.id.replace('-stars', '') : null;
 }
 
 function updateButtonsState(cardId) {
     if (!cardId) return;
-    
     const stars = starData[cardId] || 0;
     const card = document.querySelector(`#${cardId}-stars`)?.closest('.flashcard');
     if (!card) return;
-    
     const correctBtn = card.querySelector('.correct-btn');
     const reviewBtn = card.querySelector('.review-btn');
-    
-    if (correctBtn) {
-        correctBtn.disabled = (stars >= 5);
-    }
-    if (reviewBtn) {
-        reviewBtn.disabled = (stars <= 0);
-    }
+    if (correctBtn) correctBtn.disabled = (stars >= 5);
+    if (reviewBtn) reviewBtn.disabled = (stars <= 0);
 }
 
 function disableButtons(cardId) {
     if (!cardId) return;
-    
     const card = document.querySelector(`#${cardId}-stars`)?.closest('.flashcard');
     if (card) {
-        const buttons = card.querySelectorAll('.action-btn');
-        buttons.forEach(btn => btn.disabled = true);
+        card.querySelectorAll('.action-btn').forEach(btn => btn.disabled = true);
     }
 }
 
 function createStars(cardId, count) {
     const container = document.getElementById(cardId + '-stars');
     if (!container) return;
-    
     container.innerHTML = '';
     for (let i = 0; i < 5; i++) {
         const star = document.createElement('div');
@@ -486,146 +371,83 @@ function createStars(cardId, count) {
         star.innerHTML = '★';
         container.appendChild(star);
     }
-    
-    const label = document.getElementById(cardId + '-label');
-    if (label) {
-        if (count === 0) {
-            label.textContent = '開始練習';
-        } else if (count < 3) {
-            label.textContent = '繼續加油呀!';
-        } else if (count < 5) {
-            label.textContent = '信心大增!';
-        } else {
-            label.textContent = '真棒! 你已經掌握了';
-        }
-    }
 }
 
 function markCorrect(cardId, event) {
     stopPropagation(event);
-    
     if (starData[cardId] < 5) {
         starData[cardId]++;
         saveStarData();
         createStars(cardId, starData[cardId]);
         updateStats();
         updateLearningStats();
-        
         const btn = event.target.closest('.correct-btn');
         if (btn) {
             btn.disabled = true;
-            btn.style.transform = 'scale(1.1)';
-            setTimeout(() => { 
-                btn.style.transform = '';
-                updateButtonsState(cardId);
-            }, 300);
+            setTimeout(() => updateButtonsState(cardId), 300);
         }
     }
 }
 
 function markReview(cardId, event) {
     stopPropagation(event);
-    
     if (starData[cardId] > 0) {
         starData[cardId]--;
         saveStarData();
         createStars(cardId, starData[cardId]);
         updateStats();
         updateLearningStats();
-        
         const btn = event.target.closest('.review-btn');
         if (btn) {
             btn.disabled = true;
-            setTimeout(() => { 
-                updateButtonsState(cardId);
-            }, 300);
+            setTimeout(() => updateButtonsState(cardId), 300);
         }
     }
 }
 
-// === 統計更新 ===
+// === 統計更新 (配合新統計條) ===
 function updateStats() {
     if (!appData) return;
     
     const wordIds = appData.words.map(word => word.id);
     const sentenceIds = appData.sentences.map(sentence => sentence.id);
     
-    // 單詞統計
     const wordStars = wordIds.map(id => starData[id] || 0);
+    const sentenceStars = sentenceIds.map(id => starData[id] || 0);
+    
     const totalWords = wordIds.length;
     const masteredWords = wordStars.filter(v => v === 5).length;
-    const reviewWords = wordStars.filter(v => v < 5).length;
-    const wordsMastery = totalWords > 0 ? Math.round((masteredWords / totalWords) * 100) : 0;
-    
-    // 句子統計
-    const sentenceStars = sentenceIds.map(id => starData[id] || 0);
     const totalSentences = sentenceIds.length;
     const masteredSentences = sentenceStars.filter(v => v === 5).length;
-    const reviewSentences = sentenceStars.filter(v => v < 5).length;
+    
+    const wordsMastery = totalWords > 0 ? Math.round((masteredWords / totalWords) * 100) : 0;
     const sentencesMastery = totalSentences > 0 ? Math.round((masteredSentences / totalSentences) * 100) : 0;
     
-    // 更新單詞統計顯示
     document.getElementById('total-words').textContent = totalWords;
     document.getElementById('mastered-words').textContent = masteredWords;
-    document.getElementById('review-words').textContent = reviewWords;
-    document.getElementById('words-mastery').textContent = `${wordsMastery}%`;
+    document.getElementById('words-mastery').textContent = wordsMastery + '%';
     
-    // 更新句子統計顯示
     document.getElementById('total-sentences').textContent = totalSentences;
     document.getElementById('mastered-sentences').textContent = masteredSentences;
-    document.getElementById('review-sentences').textContent = reviewSentences;
-    document.getElementById('sentences-mastery').textContent = `${sentencesMastery}%`;
+    document.getElementById('sentences-mastery').textContent = sentencesMastery + '%';
     
-    // 更新當前單元標題列
-    const unitTitleEl = document.getElementById('current-unit-title');
-    const unitDescEl = document.getElementById('current-unit-description');
-    const unitStatsEl = document.getElementById('current-unit-stats');
-    const unitProgressEl = document.getElementById('current-unit-progress');
-    const unitHeader = document.getElementById('current-unit-header');
-    
-    if (appData.unit_title) {
-        unitHeader.style.display = 'flex';
-        unitTitleEl.textContent = appData.unit_title;
-        unitDescEl.textContent = appData.unit_description || '';
-        unitStatsEl.textContent = `${totalWords} 詞彙 | ${totalSentences} 句子`;
-        
-        const totalItems = totalWords + totalSentences;
-        const totalMastered = masteredWords + masteredSentences;
-        const overallMastery = totalItems > 0 ? Math.round((totalMastered / totalItems) * 100) : 0;
-        
-        unitProgressEl.textContent = `掌握度: ${overallMastery}%`;
-        
-        // 更新學習統計中的掌握度
-        if (learningStats[currentUnitId]) {
-            learningStats[currentUnitId].mastery = overallMastery;
-            saveLearningStats();
-        }
-    } else {
-        unitHeader.style.display = 'none';
-    }
-    
+    // 更新詳細統計彈窗內容 (函數保留)
     updateUnitStatsDisplay();
 }
 
-// 更新單元詳細統計顯示
 function updateUnitStatsDisplay() {
     const statsGrid = document.getElementById('unit-stats-grid');
     const statsList = document.getElementById('unit-stats-list');
+    if (!statsGrid || !statsList || !appData) return;
     
-    if (!statsGrid || !statsList) return;
-    
-    // 當前單元詳細統計
     const wordIds = appData.words.map(word => word.id);
     const sentenceIds = appData.sentences.map(sentence => sentence.id);
-    
     const wordStars = wordIds.map(id => starData[id] || 0);
     const sentenceStars = sentenceIds.map(id => starData[id] || 0);
-    
     const totalWords = wordIds.length;
     const masteredWords = wordStars.filter(v => v === 5).length;
     const totalSentences = sentenceIds.length;
     const masteredSentences = sentenceStars.filter(v => v === 5).length;
-    
     const totalItems = totalWords + totalSentences;
     const totalMastered = masteredWords + masteredSentences;
     const overallMastery = totalItems > 0 ? Math.round((totalMastered / totalItems) * 100) : 0;
@@ -633,193 +455,121 @@ function updateUnitStatsDisplay() {
     const unitStats = learningStats[currentUnitId] || {};
     
     statsGrid.innerHTML = `
-        <div class="unit-stat-item">
-            <div class="unit-stat-value">${overallMastery}%</div>
-            <div class="unit-stat-label">整體掌握度</div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: ${overallMastery}%"></div>
-            </div>
-            <div class="unit-stat-desc">${totalMastered}/${totalItems} 個項目</div>
+        <div class="unit-stat-item" style="background:#f8fafc; border-radius:12px; padding:15px;">
+            <div style="font-size:32px; font-weight:700;">${overallMastery}%</div>
+            <div>整體掌握度</div>
+            <div style="height:6px; background:#e2e8f0; border-radius:3px; margin:8px 0;"><div style="width:${overallMastery}%; height:100%; background:#48bb78; border-radius:3px;"></div></div>
+            <div style="font-size:12px; color:#718096;">${totalMastered}/${totalItems} 個項目</div>
         </div>
-        <div class="unit-stat-item">
-            <div class="unit-stat-value">${formatTime(unitStats.totalTime || 0)}</div>
-            <div class="unit-stat-label">學習時長</div>
-            <div class="unit-stat-desc">本單元總學習時間</div>
+        <div class="unit-stat-item" style="background:#f8fafc; border-radius:12px; padding:15px;">
+            <div style="font-size:32px; font-weight:700;">${formatTime(unitStats.totalTime || 0)}</div>
+            <div>學習時長</div>
         </div>
-        <div class="unit-stat-item">
-            <div class="unit-stat-value">${unitStats.sessions || 0}</div>
-            <div class="unit-stat-label">學習次數</div>
-            <div class="unit-stat-desc">練習本單元的次數</div>
+        <div class="unit-stat-item" style="background:#f8fafc; border-radius:12px; padding:15px;">
+            <div style="font-size:32px; font-weight:700;">${unitStats.sessions || 0}</div>
+            <div>學習次數</div>
         </div>
-        <div class="unit-stat-item">
-            <div class="unit-stat-value">${formatDate(unitStats.lastAccessed)}</div>
-            <div class="unit-stat-label">最後學習</div>
-            <div class="unit-stat-desc">最近一次練習時間</div>
+        <div class="unit-stat-item" style="background:#f8fafc; border-radius:12px; padding:15px;">
+            <div style="font-size:32px; font-weight:700;">${formatDate(unitStats.lastAccessed)}</div>
+            <div>最後學習</div>
         </div>
     `;
     
-    // 所有單元學習記錄
     let statsListHTML = '';
     for (const unitId in learningStats) {
-        const unitStat = learningStats[unitId];
+        const stat = learningStats[unitId];
         const unitInfo = unitsIndex.units?.find(u => u.id === unitId) || { title: unitId };
-        
         statsListHTML += `
-            <div class="unit-stats-item">
-                <div class="unit-stats-name">${unitInfo.title || unitId}</div>
-                <div class="unit-stats-data">
-                    ${formatTime(unitStat.totalTime || 0)} | 
-                    掌握度: ${unitStat.mastery || 0}% | 
-                    次數: ${unitStat.sessions || 0}
-                </div>
+            <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #edf2f7;">
+                <span>${unitInfo.title}</span>
+                <span style="color:#718096;">${formatTime(stat.totalTime || 0)} | 掌握度: ${stat.mastery || 0}% | 次數: ${stat.sessions || 0}</span>
             </div>
         `;
     }
-    
-    statsList.innerHTML = statsListHTML || '<div class="unit-stats-item">暫無學習記錄</div>';
+    statsList.innerHTML = statsListHTML || '<div style="padding:10px; color:#718096;">暫無學習記錄</div>';
 }
 
 // === 分頁管理 ===
 function showTab(tabName) {
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
-    
-    document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-    });
-    document.getElementById(tabName + '-stats').classList.add('active');
-    
-    document.querySelectorAll('.cards-section').forEach(section => {
-        section.classList.remove('active');
-    });
+    document.querySelectorAll('.cards-section').forEach(section => section.classList.remove('active'));
     document.getElementById(tabName + '-cards').classList.add('active');
 }
 
 // === 單元管理 ===
 async function loadUnit(unitId) {
     if (!unitId || unitId === currentUnitId) return;
-    
     currentUnitId = unitId;
     
-    // 顯示加載狀態
-    document.getElementById('words-grid').innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> 載入單元中...</div>';
-    document.getElementById('sentences-grid').innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> 載入單元中...</div>';
+    document.getElementById('words-grid').innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> 載入中...</div>';
+    document.getElementById('sentences-grid').innerHTML = '';
     
-    // 加載單元數據
     const success = await loadUnitData(unitId);
-    
     if (success) {
-        // 初始化數據
         initStarData();
         initLearningStats();
-        
-        // 生成卡片
         generateCards();
-        
-        // 初始化頁面
         Object.keys(starData).forEach(key => {
             createStars(key, starData[key]);
-        });
-        
-        Object.keys(starData).forEach(key => {
             disableButtons(key);
         });
-        
-        // 更新選擇器
         document.getElementById('unit-select').value = unitId;
-        
-        // 更新學習統計
         updateLearningStats();
-        
-        // 更新URL參數
         updateUrlParam('unit', unitId);
-        
-        console.log(`單元 ${unitId} 加載成功`);
     } else {
-        document.getElementById('words-grid').innerHTML = '<div class="loading">單元加載失敗，請刷新頁面重試。</div>';
-        document.getElementById('sentences-grid').innerHTML = '';
+        document.getElementById('words-grid').innerHTML = '<div class="loading">載入失敗</div>';
     }
 }
 
-// 更新單元選擇器（用於上傳後刷新下拉選單）
 function updateUnitSelect() {
     const unitSelect = document.getElementById('unit-select');
-    const currentValue = unitSelect.value;
-    
     unitSelect.innerHTML = '';
-    
     unitsIndex.units.forEach(unit => {
         const option = document.createElement('option');
         option.value = unit.id;
         option.textContent = unit.title;
         unitSelect.appendChild(option);
     });
-    
-    if (currentValue && unitsIndex.units.find(u => u.id === currentValue)) {
-        unitSelect.value = currentValue;
-    }
 }
 
-// 文件上傳處理
 async function handleFileUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
-    
     try {
         const text = await file.text();
         const unitData = JSON.parse(text);
-        
-        // 驗證JSON格式
         if (!unitData.unit_id || !unitData.unit_title || !unitData.words || !unitData.sentences) {
-            throw new Error('無效的單元JSON格式：缺少 unit_id/unit_title/words/sentences');
+            throw new Error('無效格式');
         }
-        
-        // 檢查是否已存在相同ID的單元
-        const existingUnitIndex = unitsIndex.units.findIndex(u => u.id === unitData.unit_id);
-        
-        // 創建臨時單元條目
+        const existingIndex = unitsIndex.units.findIndex(u => u.id === unitData.unit_id);
         const tempUnit = {
             id: unitData.unit_id,
             title: unitData.unit_title,
-            description: unitData.unit_description || '自定義上傳單元',
+            description: unitData.unit_description || '自定義單元',
             words_count: unitData.words.length,
             sentences_count: unitData.sentences.length,
             difficulty: unitData.difficulty || 'custom',
             created: new Date().toISOString().split('T')[0],
-            dataUrl: URL.createObjectURL(file)  // 存儲Blob URL
+            dataUrl: URL.createObjectURL(file)
         };
-        
-        if (existingUnitIndex !== -1) {
-            // 替換現有單元（同時釋放舊的Blob URL）
-            const oldUnit = unitsIndex.units[existingUnitIndex];
-            if (oldUnit.dataUrl && oldUnit.dataUrl.startsWith('blob:')) {
-                URL.revokeObjectURL(oldUnit.dataUrl);
+        if (existingIndex !== -1) {
+            if (unitsIndex.units[existingIndex].dataUrl?.startsWith('blob:')) {
+                URL.revokeObjectURL(unitsIndex.units[existingIndex].dataUrl);
             }
-            unitsIndex.units[existingUnitIndex] = tempUnit;
+            unitsIndex.units[existingIndex] = tempUnit;
         } else {
-            // 添加新單元
             unitsIndex.units.push(tempUnit);
         }
-        
-        // 更新下拉選單
         updateUnitSelect();
-        
-        // 加載上傳的單元
         await loadUnit(tempUnit.id);
-        
-        // 成功消息改為控制台輸出
-        console.log('單元上傳成功！');
-        
     } catch (error) {
-        console.error('上傳失敗：', error);
+        console.error('上傳失敗', error);
     } finally {
-        event.target.value = ''; // 清空input
+        event.target.value = '';
     }
 }
 
-// === URL參數處理 ===
 function updateUrlParam(key, value) {
     const url = new URL(window.location);
     url.searchParams.set(key, value);
@@ -827,144 +577,85 @@ function updateUrlParam(key, value) {
 }
 
 function getUrlParam(key) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(key);
+    return new URLSearchParams(window.location.search).get(key);
 }
 
-// === 重置功能（移除所有確認對話框） ===
+// === 重置功能 ===
 function resetCurrentTabData(event) {
-    if (event) {
-        event.stopPropagation();
-        event.preventDefault();
-    }
-    
+    stopPropagation(event);
     if (!appData) return;
-    
-    // 获取当前显示的选项卡
-    const activeCardsSection = document.querySelector('.cards-section.active');
-    if (!activeCardsSection) return;
-    
-    const isWordsTab = activeCardsSection.id === 'words-cards';
-    const isSentencesTab = activeCardsSection.id === 'sentences-cards';
-    
-    if (isWordsTab && appData.words) {
-        appData.words.forEach(word => {
-            starData[word.id] = 0;
-        });
-        console.log('已重置單詞進度');
-    } else if (isSentencesTab && appData.sentences) {
-        appData.sentences.forEach(sentence => {
-            starData[sentence.id] = 0;
-        });
-        console.log('已重置句子進度');
+    const activeSection = document.querySelector('.cards-section.active');
+    if (!activeSection) return;
+    const isWords = activeSection.id === 'words-cards';
+    if (isWords && appData.words) {
+        appData.words.forEach(word => starData[word.id] = 0);
+    } else if (!isWords && appData.sentences) {
+        appData.sentences.forEach(sentence => starData[sentence.id] = 0);
     }
-    
     saveStarData();
-    
-    // 重新初始化頁面
-    Object.keys(starData).forEach(key => {
-        createStars(key, starData[key]);
-    });
-    
+    Object.keys(starData).forEach(key => createStars(key, starData[key]));
     updateStats();
-    
     document.querySelectorAll('.flashcard').forEach(card => {
         card.classList.remove('flipped');
-        const cardId = getCardId(card);
-        if (cardId) disableButtons(cardId);
+        const id = getCardId(card);
+        if (id) disableButtons(id);
     });
-    
-    // 移除 alert，改為控制台輸出
-    console.log('當前單元進度已重置！');
 }
 
 function resetAllUnitsData(event) {
-    if (event) {
-        event.stopPropagation();
-        event.preventDefault();
-    }
-    
-    // 直接執行重置，不再詢問
+    stopPropagation(event);
     localStorage.removeItem('starData');
     localStorage.removeItem('learningStats');
-    
     starData = {};
     learningStats = {};
-    
     if (appData) {
         initStarData();
         initLearningStats();
-        
-        Object.keys(starData).forEach(key => {
-            createStars(key, starData[key]);
-        });
-        
+        Object.keys(starData).forEach(key => createStars(key, starData[key]));
         updateStats();
-        
         document.querySelectorAll('.flashcard').forEach(card => {
             card.classList.remove('flipped');
-            const cardId = getCardId(card);
-            if (cardId) disableButtons(cardId);
+            const id = getCardId(card);
+            if (id) disableButtons(id);
         });
     }
-    
-    console.log('所有學習進度已重置！');
 }
 
-// === 初始化頁面 ===
+// === 初始化 ===
 async function initPage() {
-    // 加載單元索引
     const indexLoaded = await loadUnitsIndex();
-    
-    if (indexLoaded && unitsIndex.units && unitsIndex.units.length > 0) {
-        // 填充單元選擇器
+    if (indexLoaded && unitsIndex.units.length) {
         updateUnitSelect();
-        
-        // 確定要加載的單元
         let unitToLoad = getUrlParam('unit');
         if (!unitToLoad || !unitsIndex.units.find(u => u.id === unitToLoad)) {
             unitToLoad = CONFIG.DEFAULT_UNIT;
         }
-        
-        // 加載默認單元
         await loadUnit(unitToLoad);
-        
-        // 設置單元選擇器事件
         document.getElementById('unit-select').addEventListener('change', function() {
             loadUnit(this.value);
         });
-        
-        // 添加上傳事件
         document.getElementById('unit-upload').addEventListener('change', handleFileUpload);
     } else {
-        document.getElementById('words-grid').innerHTML = '<div class="loading">無法載入單元列表，請檢查網絡連接。</div>';
-        document.getElementById('sentences-grid').innerHTML = '';
+        document.getElementById('words-grid').innerHTML = '<div class="loading">無法載入單元列表</div>';
     }
     
-    // 設置統計彈窗事件
-    document.getElementById('show-unit-stats').addEventListener('click', function() {
+    document.getElementById('show-unit-stats').addEventListener('click', () => {
         document.getElementById('unit-stats-modal').classList.add('active');
         updateUnitStatsDisplay();
     });
-    
-    document.getElementById('close-stats').addEventListener('click', function() {
+    document.getElementById('close-stats').addEventListener('click', () => {
         document.getElementById('unit-stats-modal').classList.remove('active');
     });
-    
-    document.getElementById('unit-stats-modal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            this.classList.remove('active');
-        }
+    document.getElementById('unit-stats-modal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) e.currentTarget.classList.remove('active');
     });
     
-    // 開始計時學習時間
     setInterval(() => {
         if (learningStats[currentUnitId]) {
-            learningStats[currentUnitId].totalTime = (learningStats[currentUnitId].totalTime || 0) + 0.5; // 每30秒加0.5分鐘
+            learningStats[currentUnitId].totalTime = (learningStats[currentUnitId].totalTime || 0) + 0.5;
             saveLearningStats();
         }
-    }, 30000); // 每30秒更新一次
+    }, 30000);
 }
 
-// 頁面加載完成時初始化
 window.addEventListener('load', initPage);
