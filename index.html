@@ -3,164 +3,467 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>英語默書練習 | 單元 5</title>
+    <title>英語默書練習系統 | 多單元選擇</title>
     <style>
         * { 
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Georgia', 'Times New Roman', 'Microsoft JhengHei', serif;
         }
         
         body { 
-            background: #f7f9fc;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             min-height: 100vh; 
+            padding: 30px 20px;
             display: flex; 
-            flex-direction: column;
-            color: #1e293b;
+            flex-direction: column; 
+            align-items: center;
+            color: #2d3748;
         }
         
-        /* 頂部導航欄 - 簡潔清晰 */
-        .top-bar {
-            background: white;
-            padding: 16px 24px;
-            border-bottom: 1px solid #e9edf2;
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        h1 {
+            font-size: 34px;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #718096;
+            font-weight: 400;
+        }
+        
+        .unit-controls {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            backdrop-filter: blur(8px);
-            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         
-        .unit-info {
+        .unit-selector {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .unit-select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            font-size: 16px;
+            color: #2d3748;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .unit-select:hover {
+            border-color: #4299e1;
+        }
+        
+        .unit-select:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+        }
+        
+        /* 上傳按鈕樣式 */
+        .upload-wrapper {
             display: flex;
             align-items: center;
-            gap: 12px;
         }
         
-        .unit-badge {
-            background: #e9edf2;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 16px;
             font-weight: 500;
-            color: #475569;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        .unit-title {
+        .upload-btn:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .upload-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .upload-btn i {
             font-size: 18px;
-            font-weight: 600;
-            color: #0f172a;
         }
         
-        .progress-section {
+        .stats-container {
+            background: white;
+            border-radius: 16px;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        
+        .current-unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        
+        .current-unit-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a365d;
+        }
+        
+        .current-unit-desc {
+            font-size: 14px;
+            color: #718096;
+        }
+        
+        .stats-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .stats-title {
+            font-size: 20px;
+            color: #2d3748;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 10px;
         }
         
-        .mastery-badge {
-            background: #e6f7ed;
-            color: #0b5e42;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 15px;
+        .stats-title i {
+            color: #4299e1;
+        }
+        
+        .unit-stats-toggle {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 6px;
         }
         
-        .mastery-badge i {
-            color: #10b981;
-            font-size: 14px;
+        .unit-stats-toggle:hover {
+            background: #3182ce;
+            transform: translateY(-2px);
         }
         
-        .stats-btn {
+        .stats-tabs {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 25px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 4px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 14px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .tab-btn.active {
+            background: white;
+            color: #1e40af;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .stats-content {
+            min-height: 180px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+        }
+        
+        .stat-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        
+        .stat-label {
+            font-size: 15px;
+            color: #718096;
+        }
+        
+        .stat-help {
+            font-size: 11px;
+            color: #a0aec0;
+            margin-top: 4px;
+        }
+        
+        .stat-category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .unit-stats-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .unit-stats-modal.active {
+            display: flex;
+        }
+        
+        .unit-stats-content {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .unit-stats-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .unit-stats-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a365d;
+        }
+        
+        .close-stats {
             background: none;
             border: none;
-            color: #64748b;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 14px;
-            border-radius: 30px;
+            font-size: 24px;
+            color: #a0aec0;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
+            transition: color 0.3s ease;
         }
         
-        .stats-btn:hover {
-            background: #f1f5f9;
-            color: #0f172a;
+        .close-stats:hover {
+            color: #e53e3e;
         }
         
-        .stats-btn i {
-            font-size: 16px;
-        }
-        
-        /* 主要內容區 */
-        .main-content {
-            flex: 1;
-            padding: 24px;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        
-        /* 分頁標籤 - 簡潔的兩欄切換 */
-        .tab-bar {
-            display: flex;
-            gap: 4px;
-            background: #f1f5f9;
-            padding: 4px;
-            border-radius: 40px;
-            width: fit-content;
-            margin-bottom: 30px;
-        }
-        
-        .tab-item {
-            padding: 10px 28px;
-            border-radius: 30px;
-            font-size: 15px;
-            font-weight: 500;
-            color: #64748b;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            background: transparent;
-        }
-        
-        .tab-item.active {
-            background: white;
-            color: #0f172a;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        
-        /* 卡片網格 - 更清爽的佈局 */
-        .cards-grid {
+        .unit-stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .unit-stat-item {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+        
+        .unit-stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 8px;
+        }
+        
+        .unit-stat-label {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 5px;
+        }
+        
+        .unit-stat-desc {
+            font-size: 12px;
+            color: #a0aec0;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #38a169, #48bb78);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .unit-stats-list {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .unit-stats-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+        
+        .unit-stats-item:last-child {
+            border-bottom: none;
+        }
+        
+        .unit-stats-name {
+            font-weight: 500;
+            color: #2d3748;
+        }
+        
+        .unit-stats-data {
+            color: #718096;
+            font-size: 14px;
+        }
+        
+        .section {
             margin-bottom: 40px;
         }
         
-        /* 句子卡片稍寬一些 */
+        .section-title {
+            font-size: 24px;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            position: relative;
+            font-weight: 600;
+        }
+        
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 70%;
+            background: #4299e1;
+            border-radius: 2px;
+        }
+        
+        .section-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 22px;
+        }
+        
+        #words-cards .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 22px;
+        }
+        
         #sentences-cards .cards-grid {
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 22px;
         }
         
         .card-container {
-            height: 220px;
-            perspective: 1200px;
+            height: 235px;
+            perspective: 1500px;
         }
         
         #sentences-cards .card-container {
-            height: 260px;
+            height: 280px;
+            position: relative;
         }
         
         .flashcard {
@@ -168,29 +471,42 @@
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: transform 1s cubic-bezier(0.4, 0.0, 0.2, 1);
             cursor: pointer;
-            border-radius: 20px;
+            border-radius: 18px;
         }
         
         .flashcard.flipped {
             transform: rotateY(180deg);
         }
         
-        .card-front, .card-back {
+        .card-front,
+        .card-back {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 20px;
-            padding: 20px;
+            -webkit-backface-visibility: hidden;
+            border-radius: 18px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 0 0 1px rgba(0,0,0,0.02);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 
+                0 15px 35px rgba(50, 50, 93, 0.1),
+                0 5px 15px rgba(0, 0, 0, 0.07),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: visible !important;
         }
         
         .card-front {
-            background: linear-gradient(145deg, #ffffff, #fafcff);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .sentence-card .card-front {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
         
         .card-back {
@@ -199,733 +515,750 @@
         }
         
         .card-number {
-            font-size: 12px;
-            color: #94a3b8;
-            margin-bottom: 12px;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+        
+        .card-back .card-number {
+            color: #a0aec0;
         }
         
         .card-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             text-align: center;
+            width: 100%;
+            margin: 10px 0;
+            padding: 0 15px;
+            overflow: hidden;
+        }
+        
+        .card-front .card-content {
+            color: white;
+        }
+        
+        .answer-text {
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            word-break: break-word;
+        }
+        
+        .card-back .answer-text {
+            color: #1a365d;
+        }
+        
+        .translation-text {
+            font-size: 18px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            word-break: break-word;
+        }
+        
+        .card-back .translation-text {
+            color: #718096;
+        }
+        
+        .sentence-card .translation-text {
+            font-size: 20px;
+            font-weight: 500;
+        }
+        
+        .hint-text {
+            font-size: 16px;
+            color: #a0aec0;
+            font-style: italic;
+            margin-bottom: 15px;
         }
         
         .stars-container {
             display: flex;
             gap: 6px;
-            margin-bottom: 10px;
+            margin: 12px 0;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         
         .star {
-            font-size: 22px;
-            color: #e2e8f0;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            user-select: none;
         }
         
         .star.active {
-            color: #fbbf24;
+            color: #ffd700;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
         }
         
         .stars-label {
-            font-size: 14px;
-            color: #94a3b8;
-            margin-top: 8px;
-        }
-        
-        .answer-text {
-            font-size: 20px;
-            font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 8px;
-            word-break: break-word;
-        }
-        
-        .translation-text {
             font-size: 16px;
-            color: #475569;
-            margin-bottom: 12px;
-            word-break: break-word;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 4px;
+            text-align: center;
         }
         
-        .hint-text {
-            font-size: 13px;
-            color: #94a3b8;
-            font-style: italic;
+        .audio-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 12px 0;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         
-        /* 卡片上的按鈕組 */
         .audio-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 40px;
-            background: #f1f5f9;
-            border: none;
-            color: #475569;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
-            margin: 0 auto;
+            transition: all 0.3s ease;
         }
         
         .audio-btn:hover {
-            background: #e2e8f0;
-            color: #0f172a;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
         
         .audio-btn.playing {
-            background: #dbeafe;
-            color: #2563eb;
-            animation: pulse 2s infinite;
+            background: rgba(255, 255, 255, 0.4);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .audio-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        .audio-btn i {
+            color: white;
+            font-size: 18px;
         }
         
         .action-buttons {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
             justify-content: center;
-            margin-top: 16px;
         }
         
         .action-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 44px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             border: none;
             cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
-            background: #f8fafc;
-            color: #64748b;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
         
-        .action-btn.correct-btn {
-            background: #e6f7ed;
-            color: #10b981;
+        .action-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
         }
         
-        .action-btn.correct-btn:hover:not(:disabled) {
-            background: #10b981;
-            color: white;
-        }
-        
-        .action-btn.review-btn {
-            background: #fff1f0;
-            color: #f97316;
-        }
-        
-        .action-btn.review-btn:hover:not(:disabled) {
-            background: #f97316;
-            color: white;
+        .action-btn:active {
+            transform: translateY(-1px) scale(0.92);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.1s;
         }
         
         .action-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+            opacity: 1 !important;
+            cursor: default;
+            transform: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .correct-btn {
+            background: #38a169;
+            opacity: 1 !important;
+        }
+        
+        .correct-btn:hover:not(:disabled) {
+            background: #38a169;
+            opacity: 1 !important;
+        }
+        
+        .correct-btn:active:not(:disabled) {
+            background: #38a169;
+            opacity: 1 !important;
+        }
+        
+        .review-btn {
+            background: #e53e3e;
+            opacity: 1 !important;
+        }
+        
+        .review-btn:hover:not(:disabled) {
+            background: #e53e3e;
+            opacity: 1 !important;
+        }
+
+        .review-btn:active:not(:disabled) {
+            background: #e53e3e;
+            opacity: 1 !important;
+        }
+        
+        .action-btn i {
+            color: white;
+            font-size: 20px;
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.2); }
-            70% { box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
         }
         
-        /* 底部操作區 */
-        .bottom-bar {
-            background: white;
-            border-top: 1px solid #e9edf2;
-            padding: 16px 24px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            position: sticky;
-            bottom: 0;
-            backdrop-filter: blur(8px);
-            background: rgba(255, 255, 255, 0.9);
-        }
-        
-        .bottom-btn {
-            padding: 10px 20px;
-            border-radius: 30px;
+        .reset-button {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
             font-size: 14px;
             font-weight: 500;
-            border: none;
             cursor: pointer;
-            display: flex;
+            transition: transform 0.3s ease;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.2);
+            opacity: 1 !important;
         }
         
-        .reset-current {
-            background: #f1f5f9;
-            color: #475569;
+        .reset-button:hover {
+            background: #e53e3e;
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 15px rgba(229, 62, 62, 0.3);
+            opacity: 1 !important;
         }
         
-        .reset-current:hover {
-            background: #e2e8f0;
+        .reset-button:active {
+            background: #e53e3e;
+            transform: translateY(0) scale(0.95);
+            box-shadow: 0 2px 5px rgba(229, 62, 62, 0.2);
+            transition: transform 0.1s;
+            opacity: 1 !important;
         }
         
-        .reset-all {
-            background: #fef2f2;
-            color: #dc2626;
-        }
-        
-        .reset-all:hover {
-            background: #fee2e2;
-        }
-        
-        /* 統計彈窗 */
-        .stats-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.3);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(4px);
-        }
-        
-        .stats-modal.active {
-            display: flex;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 24px;
-            padding: 28px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-        
-        .modal-header h3 {
-            font-size: 20px;
-            font-weight: 600;
-            color: #0f172a;
-        }
-        
-        .close-modal {
-            background: none;
+        .reset-all-button {
+            background: #718096;
+            color: white;
             border: none;
-            font-size: 24px;
-            color: #94a3b8;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
-            padding: 4px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        .close-modal:hover {
-            color: #475569;
+        .reset-all-button:hover {
+            background: #4a5568;
+            transform: translateY(-2px);
         }
         
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-        
-        .stat-card {
-            background: #f8fafc;
-            border-radius: 16px;
-            padding: 16px;
-        }
-        
-        .stat-label {
-            font-size: 13px;
-            color: #64748b;
-            margin-bottom: 6px;
-        }
-        
-        .stat-number {
-            font-size: 28px;
-            font-weight: 700;
-            color: #0f172a;
-        }
-        
-        .stat-desc {
-            font-size: 12px;
-            color: #94a3b8;
-            margin-top: 4px;
-        }
-        
-        .progress-bar {
-            height: 6px;
-            background: #e2e8f0;
-            border-radius: 3px;
-            margin-top: 12px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: #10b981;
-            border-radius: 3px;
-            transition: width 0.3s;
-        }
-        
-        /* 上傳按鈕 (隱藏式) */
-        .upload-area {
-            position: relative;
-        }
-        
-        .hidden-upload {
+        .audio-status {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2px 8px;
+            border-radius: 10px;
+            z-index: 12;
+            backdrop-filter: blur(5px);
             display: none;
         }
         
-        .upload-trigger {
-            background: none;
-            border: none;
-            color: #94a3b8;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 8px;
-            margin-right: 8px;
+        .audio-status.show {
+            display: block;
+            animation: fadeInOut 2s ease;
         }
         
-        .upload-trigger:hover {
-            color: #0f172a;
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
         }
         
-        /* 載入狀態 */
+        .cards-section {
+            display: none;
+        }
+        
+        .cards-section.active {
+            display: block;
+        }
+        
+        .stat-item.hidden {
+            display: none;
+        }
+        
+        .data-status {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
+            background: #48bb78;
+        }
+        
+        .data-status.saving {
+            background: #ed8936;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
         .loading {
-            grid-column: 1 / -1;
             text-align: center;
-            padding: 60px;
-            color: #94a3b8;
+            padding: 40px;
+            color: #718096;
         }
         
-        /* 響應式 */
-        @media (max-width: 768px) {
-            .top-bar {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-                padding: 16px;
+        .loading i {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .pronunciation-notice {
+            font-size: 12px;
+            color: #4a5568;
+            text-align: center;
+            margin-top: 5px;
+            font-style: italic;
+            background: rgba(66, 153, 225, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        @media (max-width: 1200px) {
+            #sentences-cards .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
             }
             
-            .progress-section {
+            #words-cards .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+            
+            #sentences-cards .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            }
+            
+            .unit-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .unit-selector {
+                min-width: 100%;
+            }
+            
+            .upload-btn {
                 width: 100%;
-                justify-content: space-between;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
             }
             
             .cards-grid {
                 grid-template-columns: 1fr;
             }
             
-            .bottom-bar {
-                justify-content: center;
+            #words-cards .cards-grid {
+                grid-template-columns: 1fr;
             }
             
-            .unit-title {
+            #sentences-cards .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-container {
+                height: 225px;
+            }
+            
+            #sentences-cards .card-container {
+                height: 270px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stat-value {
+                font-size: 26px;
+            }
+            
+            .answer-text {
+                font-size: 20px;
+            }
+            
+            .translation-text {
+                font-size: 17px;
+            }
+            
+            .sentence-card .translation-text {
+                font-size: 19px;
+            }
+            
+            .tab-btn {
+                padding: 12px 16px;
+                font-size: 15px;
+            }
+            
+            .reset-button {
+                padding: 6px 16px;
+                font-size: 13px;
+            }
+            
+            .unit-stats-content {
+                padding: 20px;
+            }
+            
+            .unit-stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-container {
+                height: 235px;
+            }
+            
+            #sentences-cards .card-container {
+                height: 280px;
+            }
+            
+            .audio-btn {
+                width: 44px;
+                height: 44px;
+            }
+            
+            .action-btn {
+                width: 46px;
+                height: 46px;
+            }
+            
+            .action-btn i {
+                font-size: 18px;
+            }
+            
+            .upload-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+            
+            .upload-btn i {
                 font-size: 16px;
+            }
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #a0aec0;
+            font-size: 15px;
+            width: 100%;
+        }
+        
+        .footer-links {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            color: #4299e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: #1a365d;
+            text-decoration: underline;
+        }
+        
+        /* 通知樣式 */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .notification.success {
+            background: #48bb78;
+        }
+        
+        .notification.error {
+            background: #f56565;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
             }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- 頂部狀態列 - 極簡設計 -->
-    <div class="top-bar">
-        <div class="unit-info">
-            <span class="unit-badge" id="unit-badge">單元 5</span>
-            <span class="unit-title" id="unit-title">The World of Gadgets</span>
+    <div class="container">
+        <div class="header">
+            <h1>英語默書練習系統</h1>
+            <div class="subtitle">多單元學習平台 | 自動進度追蹤</div>
         </div>
         
-        <div class="progress-section">
-            <div class="mastery-badge">
-                <i class="fa-solid fa-circle-check"></i>
-                <span id="mastery-percent">0%</span> 掌握
+        <!-- 修改後的單元控制欄：包含下拉選單和上傳按鈕 -->
+        <div class="unit-controls">
+            <div class="unit-selector">
+                <select class="unit-select" id="unit-select">
+                    <option value="">載入單元列表中...</option>
+                </select>
             </div>
-            <button class="stats-btn" id="show-stats">
-                <i class="fa-regular fa-chart-bar"></i> 詳細統計
-            </button>
-        </div>
-    </div>
-    
-    <!-- 主要內容區 -->
-    <div class="main-content">
-        <!-- 分頁切換 - 只有兩欄 -->
-        <div class="tab-bar">
-            <button class="tab-item active" onclick="showTab('words')">
-                <i class="fa-regular fa-file-lines"></i> 單詞練習
-            </button>
-            <button class="tab-item" onclick="showTab('sentences')">
-                <i class="fa-regular fa-message"></i> 句子練習
-            </button>
+            
+            <!-- 上傳按鈕區域 -->
+            <div class="upload-wrapper">
+                <label for="unit-upload" class="upload-btn">
+                    <i class="fas fa-upload"></i> 上傳JSON單元
+                </label>
+                <input type="file" id="unit-upload" accept="application/json, .json" style="display:none;">
+            </div>
         </div>
         
-        <!-- 單詞卡片區 -->
-        <div id="words-cards" class="cards-section">
+        <!-- 新增加的當前單元標題列（取代原來的 unit-info） -->
+<div class="current-unit-header" id="current-unit-header" style="display: none;">
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+        <span class="current-unit-title" id="current-unit-title"></span>
+        <span class="current-unit-desc" id="current-unit-description"></span>
+    </div>
+    <div>
+        <span id="current-unit-stats"></span>
+        <span id="current-unit-progress"></span>
+    </div>
+</div>
+        
+        <div class="stats-container">
+            <div class="stats-header">
+                <div class="stats-title">
+                    <i class="fas fa-chart-bar"></i> 學習進度概覽
+                    <span class="data-status" id="data-status"></span>
+                </div>
+                <button class="unit-stats-toggle" id="show-unit-stats">
+                    <i class="fas fa-chart-pie"></i> 詳細統計
+                </button>
+            </div>
+            
+            <div class="stats-tabs">
+                <button class="tab-btn active" onclick="showTab('words')">
+                    <i class="fas fa-font"></i> 單詞練習
+                </button>
+                <button class="tab-btn" onclick="showTab('sentences')">
+                    <i class="fas fa-align-left"></i> 句子練習
+                </button>
+            </div>
+            
+            <div class="stats-content">
+                <div class="tab-content active" id="words-stats">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-category">
+                                <div class="stat-value" id="total-words">0</div>
+                                <div class="stat-label">全部詞彙</div>
+                                <div class="stat-help">固定總數</div>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-category">
+                                <div class="stat-value" id="mastered-words">0</div>
+                                <div class="stat-label">熟練的詞彙</div>
+                                <div class="stat-help">5顆星完全掌握</div>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-category">
+                                <div class="stat-value" id="review-words">0</div>
+                                <div class="stat-label">溫習中</div>
+                                <div class="stat-help">0-4顆星</div>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-category">
+                                <div class="stat-value" id="words-mastery">0%</div>
+                                <div class="stat-label">詞彙掌握度</div>
+                                <div class="stat-help">已掌握比例</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="sentences-stats">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-category">
+                                <div class="stat-value" id="total-sentences">0</div>
+                                <div class="stat-label">全部句子</div>
+                                <div class="stat-help">固定總數</div>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-category">
+                                <div class="stat-value" id="mastered-sentences">0</div>
+                                <div class="stat-label">熟練的句子</div>
+                                <div class="stat-help">5顆星完全掌握</div>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-category">
+                                <div class="stat-value" id="review-sentences">0</div>
+                                <div class="stat-label">溫習中</div>
+                                <div class="stat-help">0-4顆星</div>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-category">
+                                <div class="stat-value" id="sentences-mastery">0%</div>
+                                <div class="stat-label">句子掌握度</div>
+                                <div class="stat-help">已掌握比例</div>
+                            </div>
+                        </div>                     
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="unit-stats-modal" id="unit-stats-modal">
+            <div class="unit-stats-content">
+                <div class="unit-stats-header">
+                    <div class="unit-stats-title">詳細學習統計</div>
+                    <button class="close-stats" id="close-stats">&times;</button>
+                </div>
+                <div class="unit-stats-grid" id="unit-stats-grid">
+                    <!-- 動態生成詳細統計 -->
+                </div>
+                <div class="unit-stats-list" id="unit-stats-list">
+                    <!-- 各單元學習記錄 -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="section cards-section active" id="words-cards">
+            <div class="section-controls">
+                <div class="section-title">高頻詞彙</div>
+                <div>
+                    <button class="reset-all-button" onclick="resetAllUnitsData(event)">
+                        <i class="fas fa-trash-alt"></i> 重置所有單元
+                    </button>
+                    <button class="reset-button" onclick="resetCurrentTabData(event)">
+                        <i class="fas fa-redo"></i> 重置當前單元
+                    </button>
+                </div>
+            </div>
             <div class="cards-grid" id="words-grid">
                 <div class="loading">
-                    <i class="fa-solid fa-spinner fa-spin"></i> 載入中...
+                    <i class="fas fa-spinner fa-spin"></i> 請先選擇單元...
                 </div>
             </div>
         </div>
         
-        <!-- 句子卡片區 -->
-        <div id="sentences-cards" class="cards-section" style="display: none;">
+        <div class="section cards-section" id="sentences-cards">
+            <div class="section-controls">
+                <div class="section-title">句子讀默</div>
+                <div>
+                    <button class="reset-all-button" onclick="resetAllUnitsData(event)">
+                        <i class="fas fa-trash-alt"></i> 重置所有單元
+                    </button>
+                    <button class="reset-button" onclick="resetCurrentTabData(event)">
+                        <i class="fas fa-redo"></i> 重置當前單元
+                    </button>
+                </div>
+            </div>     
             <div class="cards-grid" id="sentences-grid">
                 <div class="loading">
-                    <i class="fa-solid fa-spinner fa-spin"></i> 載入中...
+                    <i class="fas fa-spinner fa-spin"></i> 請先選擇單元...
                 </div>
             </div>
         </div>
         
-        <!-- 隱藏的文件上傳按鈕 -->
-        <div class="upload-area">
-            <input type="file" id="unit-upload" class="hidden-upload" accept=".json">
-        </div>
-    </div>
-    
-    <!-- 底部操作區 - 全局控制 -->
-    <div class="bottom-bar">
-        <button class="bottom-btn reset-current" onclick="resetCurrentTabData(event)">
-            <i class="fa-regular fa-rotate-right"></i> 重置當前
-        </button>
-        <button class="bottom-btn reset-all" onclick="resetAllUnitsData(event)">
-            <i class="fa-regular fa-trash-can"></i> 重置所有
-        </button>
-    </div>
-    
-    <!-- 統計彈窗 - 點擊詳細統計時顯示 -->
-    <div class="stats-modal" id="stats-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>學習統計</h3>
-                <button class="close-modal" id="close-stats">&times;</button>
-            </div>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-label">詞彙總數</div>
-                    <div class="stat-number" id="modal-total-words">0</div>
-                    <div class="stat-desc">已掌握 <span id="modal-mastered-words">0</span> 個</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-label">句子總數</div>
-                    <div class="stat-number" id="modal-total-sentences">0</div>
-                    <div class="stat-desc">已掌握 <span id="modal-mastered-sentences">0</span> 個</div>
-                </div>
-                
-                <div class="stat-card" style="grid-column: span 2;">
-                    <div class="stat-label">整體進度</div>
-                    <div class="stat-number" id="modal-total-mastery">0%</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="modal-progress" style="width: 0%"></div>
-                    </div>
-                    <div class="stat-desc" id="modal-items-count">0/0 項目已完成</div>
-                </div>
-            </div>
-        </div>
+        <div class="footer">
+            <div>英語默書練習系統 © 2023 | 使用電腦瀏覽器聲音效果更佳</div>
+           </div>
     </div>
 
-    <script>
-        // 簡化版的應用程式碼 - 只保留核心功能
-        let appData = null;
-        let starData = {};
-        let currentUnitId = 'unit5';
-        
-        // 初始化
-        async function init() {
-            await loadUnitData(currentUnitId);
-            initStarData();
-            generateCards();
-            updateMastery();
-            
-            // 事件監聽
-            document.getElementById('show-stats').addEventListener('click', showStatsModal);
-            document.getElementById('close-stats').addEventListener('click', hideStatsModal);
-            document.getElementById('stats-modal').addEventListener('click', (e) => {
-                if (e.target === e.currentTarget) hideStatsModal();
-            });
-            
-            // 添加上傳功能
-            document.querySelector('.upload-trigger')?.addEventListener('click', () => {
-                document.getElementById('unit-upload').click();
-            });
-        }
-        
-        // 載入單元數據
-        async function loadUnitData(unitId) {
-            try {
-                const response = await fetch(`data/${unitId}.json`);
-                appData = await response.json();
-                
-                // 更新頂部資訊
-                document.getElementById('unit-badge').textContent = `單元 ${unitId.replace('unit', '')}`;
-                document.getElementById('unit-title').textContent = appData.unit_title;
-                
-                return true;
-            } catch (error) {
-                console.error('載入失敗:', error);
-                return false;
-            }
-        }
-        
-        // 初始化星星數據
-        function initStarData() {
-            const saved = JSON.parse(localStorage.getItem('starData') || '{}');
-            const allIds = [
-                ...appData.words.map(w => w.id),
-                ...appData.sentences.map(s => s.id)
-            ];
-            allIds.forEach(id => {
-                starData[id] = saved[id] || 0;
-            });
-        }
-        
-        // 生成卡片
-        function generateCards() {
-            const wordsGrid = document.getElementById('words-grid');
-            const sentencesGrid = document.getElementById('sentences-grid');
-            
-            if (appData.words.length) {
-                wordsGrid.innerHTML = appData.words.map((word, i) => `
-                    <div class="card-container">
-                        <div class="flashcard" onclick="flipCard(this)">
-                            <div class="card-front">
-                                <div class="card-number">單詞 ${i+1}</div>
-                                <div class="card-content">
-                                    <div class="stars-container" id="${word.id}-stars"></div>
-                                    <div class="stars-label" id="${word.id}-label">點擊翻開</div>
-                                </div>
-                                <button class="audio-btn" onclick="playAudio('${word.audio}', this, event)">
-                                    <i class="fa-solid fa-volume-high"></i>
-                                </button>
-                            </div>
-                            <div class="card-back">
-                                <div class="card-number">單詞 ${i+1}</div>
-                                <div class="card-content">
-                                    <div class="answer-text">${word.english}</div>
-                                    <div class="translation-text">${word.translation}</div>
-                                    ${word.hint ? `<div class="hint-text">${word.hint}</div>` : ''}
-                                </div>
-                                <div class="action-buttons">
-                                    <button class="action-btn correct-btn" onclick="markCorrect('${word.id}', event)">
-                                        <i class="fa-solid fa-check"></i>
-                                    </button>
-                                    <button class="action-btn review-btn" onclick="markReview('${word.id}', event)">
-                                        <i class="fa-solid fa-book-open"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-            
-            if (appData.sentences.length) {
-                sentencesGrid.innerHTML = appData.sentences.map((s, i) => `
-                    <div class="card-container">
-                        <div class="flashcard" onclick="flipCard(this)">
-                            <div class="card-front">
-                                <div class="card-number">句子 ${i+1}</div>
-                                <div class="card-content">
-                                    <div class="stars-container" id="${s.id}-stars"></div>
-                                    <div class="stars-label" id="${s.id}-label">點擊翻開</div>
-                                </div>
-                                <button class="audio-btn" onclick="playAudio('${s.audio}', this, event)">
-                                    <i class="fa-solid fa-volume-high"></i>
-                                </button>
-                            </div>
-                            <div class="card-back">
-                                <div class="card-number">句子 ${i+1}</div>
-                                <div class="card-content">
-                                    <div class="answer-text">${s.english}</div>
-                                    <div class="translation-text">${s.translation}</div>
-                                </div>
-                                <div class="action-buttons">
-                                    <button class="action-btn correct-btn" onclick="markCorrect('${s.id}', event)">
-                                        <i class="fa-solid fa-check"></i>
-                                    </button>
-                                    <button class="action-btn review-btn" onclick="markReview('${s.id}', event)">
-                                        <i class="fa-solid fa-book-open"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-            
-            // 更新星星顯示
-            Object.keys(starData).forEach(id => {
-                updateStars(id, starData[id]);
-            });
-        }
-        
-        // 更新星星
-        function updateStars(id, count) {
-            const container = document.getElementById(`${id}-stars`);
-            if (!container) return;
-            
-            container.innerHTML = '';
-            for (let i = 0; i < 5; i++) {
-                const star = document.createElement('span');
-                star.className = 'star' + (i < count ? ' active' : '');
-                star.innerHTML = '★';
-                container.appendChild(star);
-            }
-            
-            // 更新標籤文字
-            const label = document.getElementById(`${id}-label`);
-            if (label) {
-                if (count === 0) label.textContent = '開始練習';
-                else if (count < 3) label.textContent = '繼續加油';
-                else if (count < 5) label.textContent = '信心大增';
-                else label.textContent = '已經掌握';
-            }
-        }
-        
-        // 翻轉卡片
-        function flipCard(card) {
-            card.classList.toggle('flipped');
-        }
-        
-        // 標記正確
-        function markCorrect(id, event) {
-            event.stopPropagation();
-            if (starData[id] < 5) {
-                starData[id]++;
-                saveStarData();
-                updateStars(id, starData[id]);
-                updateMastery();
-            }
-        }
-        
-        // 標記複習
-        function markReview(id, event) {
-            event.stopPropagation();
-            if (starData[id] > 0) {
-                starData[id]--;
-                saveStarData();
-                updateStars(id, starData[id]);
-                updateMastery();
-            }
-        }
-        
-        // 音頻播放
-        function playAudio(text, btn, event) {
-            event.stopPropagation();
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                utterance.rate = 0.9;
-                
-                btn.classList.add('playing');
-                utterance.onend = () => btn.classList.remove('playing');
-                utterance.onerror = () => btn.classList.remove('playing');
-                
-                speechSynthesis.speak(utterance);
-            }
-        }
-        
-        // 保存數據
-        function saveStarData() {
-            localStorage.setItem('starData', JSON.stringify(starData));
-        }
-        
-        // 更新掌握度
-        function updateMastery() {
-            const allIds = [
-                ...appData.words.map(w => w.id),
-                ...appData.sentences.map(s => s.id)
-            ];
-            
-            const mastered = allIds.filter(id => starData[id] === 5).length;
-            const total = allIds.length;
-            const percent = total > 0 ? Math.round((mastered / total) * 100) : 0;
-            
-            document.getElementById('mastery-percent').textContent = percent + '%';
-            
-            // 更新彈窗數據
-            const wordIds = appData.words.map(w => w.id);
-            const sentenceIds = appData.sentences.map(s => s.id);
-            
-            document.getElementById('modal-total-words').textContent = wordIds.length;
-            document.getElementById('modal-mastered-words').textContent = 
-                wordIds.filter(id => starData[id] === 5).length;
-            
-            document.getElementById('modal-total-sentences').textContent = sentenceIds.length;
-            document.getElementById('modal-mastered-sentences').textContent = 
-                sentenceIds.filter(id => starData[id] === 5).length;
-            
-            document.getElementById('modal-total-mastery').textContent = percent + '%';
-            document.getElementById('modal-progress').style.width = percent + '%';
-            document.getElementById('modal-items-count').textContent = `${mastered}/${total} 項目`;
-        }
-        
-        // 顯示統計彈窗
-        function showStatsModal() {
-            document.getElementById('stats-modal').classList.add('active');
-        }
-        
-        function hideStatsModal() {
-            document.getElementById('stats-modal').classList.remove('active');
-        }
-        
-        // 切換分頁
-        function showTab(tab) {
-            document.querySelectorAll('.tab-item').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            document.getElementById('words-cards').style.display = tab === 'words' ? 'block' : 'none';
-            document.getElementById('sentences-cards').style.display = tab === 'sentences' ? 'block' : 'none';
-        }
-        
-        // 重置當前分頁
-        function resetCurrentTabData(event) {
-            event?.stopPropagation();
-            if (!appData) return;
-            
-            const isWords = document.getElementById('words-cards').style.display !== 'none';
-            
-            if (isWords) {
-                appData.words.forEach(word => starData[word.id] = 0);
-            } else {
-                appData.sentences.forEach(sentence => starData[sentence.id] = 0);
-            }
-            
-            saveStarData();
-            Object.keys(starData).forEach(id => updateStars(id, starData[id]));
-            updateMastery();
-        }
-        
-        // 重置所有
-        function resetAllUnitsData(event) {
-            event?.stopPropagation();
-            localStorage.removeItem('starData');
-            
-            if (appData) {
-                const allIds = [
-                    ...appData.words.map(w => w.id),
-                    ...appData.sentences.map(s => s.id)
-                ];
-                allIds.forEach(id => starData[id] = 0);
-                Object.keys(starData).forEach(id => updateStars(id, starData[id]));
-                updateMastery();
-            }
-        }
-        
-        // 啟動
-        window.addEventListener('load', init);
-    </script>
+    <script src="js/app.js"></script>
 </body>
 </html>
