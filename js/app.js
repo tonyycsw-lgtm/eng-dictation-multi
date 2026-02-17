@@ -61,6 +61,7 @@ class StableAudioPlayer {
     }
     
     showAudioStatus(cardElement, message) {
+        // 保留卡片内的状态提示（不影响用户体验）
         let statusElement = cardElement.querySelector('.audio-status');
         if (!statusElement) {
             statusElement = document.createElement('div');
@@ -761,25 +762,6 @@ function updateUnitSelect() {
     }
 }
 
-// 顯示通知
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.innerHTML = `
-        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
-        <span>${message}</span>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => {
-            notification.remove();
-        }, 300);
-    }, 3000);
-}
-
 // 文件上傳處理
 async function handleFileUpload(event) {
     const file = event.target.files[0];
@@ -827,12 +809,11 @@ async function handleFileUpload(event) {
         // 加載上傳的單元
         await loadUnit(tempUnit.id);
         
-        // 顯示成功消息
-        showNotification('單元上傳成功！', 'success');
+        // 成功消息改為控制台輸出
+        console.log('單元上傳成功！');
         
     } catch (error) {
-        console.error('上傳失敗:', error);
-        showNotification('上傳失敗：' + error.message, 'error');
+        console.error('上傳失敗：', error);
     } finally {
         event.target.value = ''; // 清空input
     }
@@ -850,32 +831,32 @@ function getUrlParam(key) {
     return urlParams.get(key);
 }
 
-// === 重置功能 ===
+// === 重置功能（移除所有確認對話框） ===
 function resetCurrentTabData(event) {
     if (event) {
         event.stopPropagation();
         event.preventDefault();
     }
     
-    if (!appData || !confirm('確定要重置當前單元的學習進度嗎？此操作無法撤銷。')) {
-        return;
-    }
+    if (!appData) return;
     
-    const activeTab = document.querySelector('.tab-btn.active');
-    if (!activeTab) return;
+    // 获取当前显示的选项卡
+    const activeCardsSection = document.querySelector('.cards-section.active');
+    if (!activeCardsSection) return;
     
-    const tabText = activeTab.textContent.toLowerCase();
-    const isWordsTab = tabText.includes('單詞');
-    const isSentencesTab = tabText.includes('句子');
+    const isWordsTab = activeCardsSection.id === 'words-cards';
+    const isSentencesTab = activeCardsSection.id === 'sentences-cards';
     
-    if (isWordsTab) {
+    if (isWordsTab && appData.words) {
         appData.words.forEach(word => {
             starData[word.id] = 0;
         });
-    } else if (isSentencesTab) {
+        console.log('已重置單詞進度');
+    } else if (isSentencesTab && appData.sentences) {
         appData.sentences.forEach(sentence => {
             starData[sentence.id] = 0;
         });
+        console.log('已重置句子進度');
     }
     
     saveStarData();
@@ -893,7 +874,8 @@ function resetCurrentTabData(event) {
         if (cardId) disableButtons(cardId);
     });
     
-    alert('當前單元進度已重置！');
+    // 移除 alert，改為控制台輸出
+    console.log('當前單元進度已重置！');
 }
 
 function resetAllUnitsData(event) {
@@ -902,10 +884,7 @@ function resetAllUnitsData(event) {
         event.preventDefault();
     }
     
-    if (!confirm('確定要重置所有單元的學習進度嗎？此操作將清除所有學習記錄，無法撤銷。')) {
-        return;
-    }
-    
+    // 直接執行重置，不再詢問
     localStorage.removeItem('starData');
     localStorage.removeItem('learningStats');
     
@@ -929,86 +908,7 @@ function resetAllUnitsData(event) {
         });
     }
     
-    alert('所有學習進度已重置！');
-}
-
-// === 數據導入導出 ===
-function exportData() {
-    const exportData = {
-        starData: JSON.parse(localStorage.getItem('starData') || '{}'),
-        learningStats: JSON.parse(localStorage.getItem('learningStats') || '{}'),
-        exportDate: new Date().toISOString(),
-        version: '1.0'
-    };
-    
-    const dataStr = JSON.stringify(exportData, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    
-    const exportFileDefaultName = `english-dictation-backup-${new Date().toISOString().split('T')[0]}.json`;
-    
-    const linkElement = document.createElement('a');
-    linkElement.setAttribute('href', dataUri);
-    linkElement.setAttribute('download', exportFileDefaultName);
-    linkElement.click();
-    
-    alert('學習數據已導出！');
-}
-
-function importData() {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.json';
-    
-    input.onchange = function(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            try {
-                const importData = JSON.parse(e.target.result);
-                
-                if (confirm('確定要導入學習數據嗎？這將覆蓋現有的學習記錄。')) {
-                    if (importData.starData) {
-                        localStorage.setItem('starData', JSON.stringify(importData.starData));
-                    }
-                    if (importData.learningStats) {
-                        localStorage.setItem('learningStats', JSON.stringify(importData.learningStats));
-                    }
-                    
-                    // 重新加載當前單元
-                    if (currentUnitId) {
-                        loadUnit(currentUnitId);
-                    }
-                    
-                    alert('學習數據導入成功！');
-                }
-            } catch (error) {
-                alert('文件格式錯誤，無法導入數據。');
-                console.error('導入數據失敗:', error);
-            }
-        };
-        reader.readAsText(file);
-    };
-    
-    input.click();
-}
-
-// === 幫助功能 ===
-function showHelp() {
-    alert(`英語默書練習系統 使用說明：
-
-1. 選擇單元：從下拉選單中選擇要學習的單元
-2. 單詞練習：點擊卡片翻轉，查看單詞和翻譯
-3. 句子練習：練習完整句子，點擊音頻按鈕聽發音
-4. 掌握程度：點擊✓標記掌握，點擊書本標記需複習
-5. 星星系統：5顆星表示完全掌握
-6. 數據保存：所有進度自動保存在瀏覽器中
-7. 重置功能：可重置當前單元或所有單元
-8. 數據備份：可導出/導入學習數據
-9. 上傳單元：可上載自定義的 JSON 單元檔案
-
-提示：使用耳機或音響可獲得更好的聽力體驗！`);
+    console.log('所有學習進度已重置！');
 }
 
 // === 初始化頁面 ===
