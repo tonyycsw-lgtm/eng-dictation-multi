@@ -334,20 +334,22 @@ function flipCard(card) {
     if (card.classList.contains('flipped')) {
         updateButtonsState(cardId);
         
-        // 翻到反面時自動播放音頻
-        const audioBtn = card.querySelector('.audio-btn');
-        if (audioBtn && !audioBtn.disabled) {
-            const onclickAttr = audioBtn.getAttribute('onclick');
-            const match = onclickAttr && onclickAttr.match(/playAudio\('([^']+)'/);
-            if (match && match[1]) {
-                const audioKey = match[1];
-                audioPlayer.playAudio(audioKey, audioBtn, { stopPropagation: () => {} });
+        // 檢查是否已經播放過（可選）
+        if (!card.dataset.audioPlayed) {
+            const audioBtn = card.querySelector('.audio-btn');
+            if (audioBtn && !audioBtn.disabled) {
+                const onclickAttr = audioBtn.getAttribute('onclick');
+                const match = onclickAttr && onclickAttr.match(/playAudio\('([^']+)'/);
+                if (match && match[1]) {
+                    const audioKey = match[1];
+                    audioPlayer.playAudio(audioKey, audioBtn, { stopPropagation: () => {} });
+                    card.dataset.audioPlayed = 'true'; // 標記已播放
+                }
             }
         }
     } else {
         disableButtons(cardId);
         
-        // 翻回正面時停止播放
         if (audioPlayer.isPlaying) {
             audioPlayer.stopCurrentAudio();
         }
