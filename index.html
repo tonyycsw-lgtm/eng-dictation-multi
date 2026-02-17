@@ -86,7 +86,6 @@
             box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
         }
         
-        /* 上傳按鈕樣式 */
         .upload-wrapper {
             display: flex;
             align-items: center;
@@ -124,22 +123,25 @@
             font-size: 18px;
         }
         
-        .stats-container {
-            background: white;
-            border-radius: 16px;
-            padding: 25px 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-            border: 1px solid rgba(0, 0, 0, 0.04);
-        }
-        
+        /* 當前單元標題列（整合了詳細統計按鈕） */
         .current-unit-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed #e2e8f0;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .unit-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
         
         .current-unit-title {
@@ -153,26 +155,30 @@
             color: #718096;
         }
         
-        .stats-header {
+        .unit-meta {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            gap: 20px;
             flex-wrap: wrap;
-            gap: 15px;
         }
         
-        .stats-title {
-            font-size: 20px;
-            color: #2d3748;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .unit-stats-badge {
+            font-size: 14px;
+            color: #4a5568;
+            background: #f1f5f9;
+            padding: 6px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
         }
         
-        .stats-title i {
-            color: #4299e1;
+        .unit-progress-badge {
+            font-size: 14px;
+            color: #1e40af;
+            background: #e0f2fe;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            white-space: nowrap;
         }
         
         .unit-stats-toggle {
@@ -188,6 +194,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            white-space: nowrap;
         }
         
         .unit-stats-toggle:hover {
@@ -195,7 +202,8 @@
             transform: translateY(-2px);
         }
         
-        .stats-tabs {
+        /* 分頁按鈕 */
+        .tabs {
             display: flex;
             gap: 2px;
             margin-bottom: 25px;
@@ -231,47 +239,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
         
-        .stats-content {
-            min-height: 180px;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 18px;
-        }
-        
-        .stat-item {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 18px;
-            text-align: center;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-        }
-        
-        .stat-value {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-        
-        .stat-label {
-            font-size: 15px;
-            color: #718096;
-        }
-        
-        .stat-help {
-            font-size: 11px;
-            color: #a0aec0;
-            margin-top: 4px;
-        }
-        
-        .stat-category {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
+        /* 詳細統計彈窗 */
         .unit-stats-modal {
             display: none;
             position: fixed;
@@ -404,6 +372,7 @@
             font-size: 14px;
         }
         
+        /* 卡片區域 */
         .section {
             margin-bottom: 40px;
         }
@@ -427,15 +396,6 @@
             height: 70%;
             background: #4299e1;
             border-radius: 2px;
-        }
-        
-        .section-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
         }
         
         .cards-grid {
@@ -687,27 +647,7 @@
             opacity: 1 !important;
         }
         
-        .correct-btn:hover:not(:disabled) {
-            background: #38a169;
-            opacity: 1 !important;
-        }
-        
-        .correct-btn:active:not(:disabled) {
-            background: #38a169;
-            opacity: 1 !important;
-        }
-        
         .review-btn {
-            background: #e53e3e;
-            opacity: 1 !important;
-        }
-        
-        .review-btn:hover:not(:disabled) {
-            background: #e53e3e;
-            opacity: 1 !important;
-        }
-
-        .review-btn:active:not(:disabled) {
             background: #e53e3e;
             opacity: 1 !important;
         }
@@ -721,6 +661,25 @@
             0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
             70% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+        
+        /* 底部控制項 */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #a0aec0;
+            font-size: 15px;
+            width: 100%;
+        }
+        
+        .footer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0 10px;
+            flex-wrap: wrap;
         }
         
         .reset-button {
@@ -737,14 +696,12 @@
             align-items: center;
             gap: 6px;
             box-shadow: 0 4px 12px rgba(229, 62, 62, 0.2);
-            opacity: 1 !important;
         }
         
         .reset-button:hover {
             background: #e53e3e;
             transform: translateY(-2px) scale(1.03);
             box-shadow: 0 6px 15px rgba(229, 62, 62, 0.3);
-            opacity: 1 !important;
         }
         
         .reset-button:active {
@@ -752,7 +709,6 @@
             transform: translateY(0) scale(0.95);
             box-shadow: 0 2px 5px rgba(229, 62, 62, 0.2);
             transition: transform 0.1s;
-            opacity: 1 !important;
         }
         
         .reset-all-button {
@@ -810,10 +766,6 @@
             display: block;
         }
         
-        .stat-item.hidden {
-            display: none;
-        }
-        
         .data-status {
             display: inline-block;
             width: 8px;
@@ -842,18 +794,6 @@
         .loading i {
             font-size: 24px;
             margin-bottom: 15px;
-        }
-        
-        .pronunciation-notice {
-            font-size: 12px;
-            color: #4a5568;
-            text-align: center;
-            margin-top: 5px;
-            font-style: italic;
-            background: rgba(66, 153, 225, 0.1);
-            padding: 2px 8px;
-            border-radius: 4px;
-            display: inline-block;
         }
         
         @media (max-width: 1200px) {
@@ -887,6 +827,16 @@
             .upload-btn {
                 width: 100%;
                 justify-content: center;
+            }
+            
+            .current-unit-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .unit-meta {
+                width: 100%;
+                justify-content: space-between;
             }
         }
         
@@ -923,34 +873,9 @@
                 height: 270px;
             }
             
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stat-value {
-                font-size: 26px;
-            }
-            
-            .answer-text {
-                font-size: 20px;
-            }
-            
-            .translation-text {
-                font-size: 17px;
-            }
-            
-            .sentence-card .translation-text {
-                font-size: 19px;
-            }
-            
             .tab-btn {
                 padding: 12px 16px;
                 font-size: 15px;
-            }
-            
-            .reset-button {
-                padding: 6px 16px;
-                font-size: 13px;
             }
             
             .unit-stats-content {
@@ -963,10 +888,6 @@
         }
         
         @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .card-container {
                 height: 235px;
             }
@@ -985,92 +906,14 @@
                 height: 46px;
             }
             
-            .action-btn i {
-                font-size: 18px;
-            }
-            
             .upload-btn {
                 padding: 10px 16px;
                 font-size: 14px;
             }
             
-            .upload-btn i {
-                font-size: 16px;
-            }
-        }
-        
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            text-align: center;
-            color: #a0aec0;
-            font-size: 15px;
-            width: 100%;
-        }
-        
-        .footer-links {
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .footer-link {
-            color: #4299e1;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-link:hover {
-            color: #1a365d;
-            text-decoration: underline;
-        }
-        
-        /* 通知樣式 */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: slideIn 0.3s ease;
-        }
-        
-        .notification.success {
-            background: #48bb78;
-        }
-        
-        .notification.error {
-            background: #f56565;
-        }
-        
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
+            .footer-controls {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -1083,15 +926,13 @@
             <div class="subtitle">多單元學習平台 | 自動進度追蹤</div>
         </div>
         
-        <!-- 修改後的單元控制欄：包含下拉選單和上傳按鈕 -->
+        <!-- 單元控制欄 -->
         <div class="unit-controls">
             <div class="unit-selector">
                 <select class="unit-select" id="unit-select">
                     <option value="">載入單元列表中...</option>
                 </select>
             </div>
-            
-            <!-- 上傳按鈕區域 -->
             <div class="upload-wrapper">
                 <label for="unit-upload" class="upload-btn">
                     <i class="fas fa-upload"></i> 上傳JSON單元
@@ -1100,107 +941,32 @@
             </div>
         </div>
         
-        <!-- 新增加的當前單元標題列（取代原來的 unit-info） -->
-<div class="current-unit-header" id="current-unit-header" style="display: none;">
-    <div style="display: flex; flex-direction: column; gap: 4px;">
-        <span class="current-unit-title" id="current-unit-title"></span>
-        <span class="current-unit-desc" id="current-unit-description"></span>
-    </div>
-    <div>
-        <span id="current-unit-stats"></span>
-        <span id="current-unit-progress"></span>
-    </div>
-</div>
-        
-        <div class="stats-container">
-            <div class="stats-header">
-                <div class="stats-title">
-                    <i class="fas fa-chart-bar"></i> 學習進度概覽
-                    <span class="data-status" id="data-status"></span>
-                </div>
+        <!-- 當前單元標題列（整合詳細統計按鈕） -->
+        <div class="current-unit-header" id="current-unit-header" style="display: none;">
+            <div class="unit-info">
+                <span class="current-unit-title" id="current-unit-title"></span>
+                <span class="current-unit-desc" id="current-unit-description"></span>
+            </div>
+            <div class="unit-meta">
+                <span class="unit-stats-badge" id="current-unit-stats"></span>
+                <span class="unit-progress-badge" id="current-unit-progress"></span>
                 <button class="unit-stats-toggle" id="show-unit-stats">
                     <i class="fas fa-chart-pie"></i> 詳細統計
                 </button>
             </div>
-            
-            <div class="stats-tabs">
-                <button class="tab-btn active" onclick="showTab('words')">
-                    <i class="fas fa-font"></i> 單詞練習
-                </button>
-                <button class="tab-btn" onclick="showTab('sentences')">
-                    <i class="fas fa-align-left"></i> 句子練習
-                </button>
-            </div>
-            
-            <div class="stats-content">
-                <div class="tab-content active" id="words-stats">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-category">
-                                <div class="stat-value" id="total-words">0</div>
-                                <div class="stat-label">全部詞彙</div>
-                                <div class="stat-help">固定總數</div>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-category">
-                                <div class="stat-value" id="mastered-words">0</div>
-                                <div class="stat-label">熟練的詞彙</div>
-                                <div class="stat-help">5顆星完全掌握</div>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-category">
-                                <div class="stat-value" id="review-words">0</div>
-                                <div class="stat-label">溫習中</div>
-                                <div class="stat-help">0-4顆星</div>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-category">
-                                <div class="stat-value" id="words-mastery">0%</div>
-                                <div class="stat-label">詞彙掌握度</div>
-                                <div class="stat-help">已掌握比例</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tab-content" id="sentences-stats">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-category">
-                                <div class="stat-value" id="total-sentences">0</div>
-                                <div class="stat-label">全部句子</div>
-                                <div class="stat-help">固定總數</div>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-category">
-                                <div class="stat-value" id="mastered-sentences">0</div>
-                                <div class="stat-label">熟練的句子</div>
-                                <div class="stat-help">5顆星完全掌握</div>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-category">
-                                <div class="stat-value" id="review-sentences">0</div>
-                                <div class="stat-label">溫習中</div>
-                                <div class="stat-help">0-4顆星</div>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-category">
-                                <div class="stat-value" id="sentences-mastery">0%</div>
-                                <div class="stat-label">句子掌握度</div>
-                                <div class="stat-help">已掌握比例</div>
-                            </div>
-                        </div>                     
-                    </div>
-                </div>
-            </div>
         </div>
         
+        <!-- 分頁按鈕 -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('words')">
+                <i class="fas fa-font"></i> 單詞練習
+            </button>
+            <button class="tab-btn" onclick="showTab('sentences')">
+                <i class="fas fa-align-left"></i> 句子練習
+            </button>
+        </div>
+        
+        <!-- 詳細統計彈窗 -->
         <div class="unit-stats-modal" id="unit-stats-modal">
             <div class="unit-stats-content">
                 <div class="unit-stats-header">
@@ -1216,18 +982,9 @@
             </div>
         </div>
         
+        <!-- 單詞卡片區 -->
         <div class="section cards-section active" id="words-cards">
-            <div class="section-controls">
-                <div class="section-title">高頻詞彙</div>
-                <div>
-                    <button class="reset-all-button" onclick="resetAllUnitsData(event)">
-                        <i class="fas fa-trash-alt"></i> 重置所有單元
-                    </button>
-                    <button class="reset-button" onclick="resetCurrentTabData(event)">
-                        <i class="fas fa-redo"></i> 重置當前單元
-                    </button>
-                </div>
-            </div>
+            <div class="section-title">高頻詞彙</div>
             <div class="cards-grid" id="words-grid">
                 <div class="loading">
                     <i class="fas fa-spinner fa-spin"></i> 請先選擇單元...
@@ -1235,18 +992,9 @@
             </div>
         </div>
         
+        <!-- 句子卡片區 -->
         <div class="section cards-section" id="sentences-cards">
-            <div class="section-controls">
-                <div class="section-title">句子讀默</div>
-                <div>
-                    <button class="reset-all-button" onclick="resetAllUnitsData(event)">
-                        <i class="fas fa-trash-alt"></i> 重置所有單元
-                    </button>
-                    <button class="reset-button" onclick="resetCurrentTabData(event)">
-                        <i class="fas fa-redo"></i> 重置當前單元
-                    </button>
-                </div>
-            </div>     
+            <div class="section-title">句子讀默</div>
             <div class="cards-grid" id="sentences-grid">
                 <div class="loading">
                     <i class="fas fa-spinner fa-spin"></i> 請先選擇單元...
@@ -1254,9 +1002,18 @@
             </div>
         </div>
         
+        <!-- 底部：重置按鈕與版權 -->
         <div class="footer">
+            <div class="footer-controls">
+                <button class="reset-button" onclick="resetCurrentTabData(event)">
+                    <i class="fas fa-redo"></i> 重置當前單元
+                </button>
+                <button class="reset-all-button" onclick="resetAllUnitsData(event)">
+                    <i class="fas fa-trash-alt"></i> 重置所有單元
+                </button>
+            </div>
             <div>英語默書練習系統 © 2023 | 使用電腦瀏覽器聲音效果更佳</div>
-           </div>
+        </div>
     </div>
 
     <script src="js/app.js"></script>
