@@ -564,6 +564,18 @@ function updateStats() {
     const reviewSentences = sentenceStars.filter(v => v < 5).length;
     const sentencesMastery = totalSentences > 0 ? Math.round((masteredSentences / totalSentences) * 100) : 0;
     
+    // 更新單詞統計顯示
+    document.getElementById('total-words').textContent = totalWords;
+    document.getElementById('mastered-words').textContent = masteredWords;
+    document.getElementById('review-words').textContent = reviewWords;
+    document.getElementById('words-mastery').textContent = `${wordsMastery}%`;
+    
+    // 更新句子統計顯示
+    document.getElementById('total-sentences').textContent = totalSentences;
+    document.getElementById('mastered-sentences').textContent = masteredSentences;
+    document.getElementById('review-sentences').textContent = reviewSentences;
+    document.getElementById('sentences-mastery').textContent = `${sentencesMastery}%`;
+    
     // 更新當前單元標題列
     const unitTitleEl = document.getElementById('current-unit-title');
     const unitDescEl = document.getElementById('current-unit-description');
@@ -592,7 +604,6 @@ function updateStats() {
         unitHeader.style.display = 'none';
     }
     
-    // 更新詳細統計彈窗內容
     updateUnitStatsDisplay();
 }
 
@@ -670,14 +681,16 @@ function updateUnitStatsDisplay() {
 
 // === 分頁管理 ===
 function showTab(tabName) {
-    // 更新分頁按鈕狀態
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
     });
-    // 由於按鈕是通過 onclick 調用，會自動傳入 event
-    if (event) event.target.classList.add('active');
+    event.target.classList.add('active');
     
-    // 切換卡片區域
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.getElementById(tabName + '-stats').classList.add('active');
+    
     document.querySelectorAll('.cards-section').forEach(section => {
         section.classList.remove('active');
     });
