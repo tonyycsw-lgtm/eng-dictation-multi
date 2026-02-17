@@ -7,7 +7,7 @@ const CONFIG = {
 
 // === 全局變量 ===
 let appData = null;
-let unitsIndex = [];
+let unitsIndex = { units: [] };
 let currentUnitId = '';
 let starData = {};
 let learningStats = {};
@@ -234,6 +234,21 @@ async function loadUnitsIndex() {
 
 // 加載單元數據
 async function loadUnitData(unitId) {
+    // 先檢查是否是上傳的單元（有 dataUrl）
+    const unitInfo = unitsIndex.units.find(u => u.id === unitId);
+    if (unitInfo && unitInfo.dataUrl) {
+        try {
+            const response = await fetch(unitInfo.dataUrl);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            appData = await response.json();
+            return true;
+        } catch (error) {
+            console.error(`加載上傳單元 ${unitId} 失敗:`, error);
+            return false;
+        }
+    }
+    
+    // 否則從靜態文件加載
     try {
         const response = await fetch(`${CONFIG.DATA_PATH}${unitId}.json`);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -560,28 +575,32 @@ function updateStats() {
     document.getElementById('review-sentences').textContent = reviewSentences;
     document.getElementById('sentences-mastery').textContent = `${sentencesMastery}%`;
     
-    // 更新單元信息
-    const unitTitle = document.getElementById('current-unit-title');
-    const unitDesc = document.getElementById('current-unit-description');
-    const unitStats = document.getElementById('current-unit-stats');
-    const unitProgress = document.getElementById('current-unit-progress');
+    // 更新當前單元標題列
+    const unitTitleEl = document.getElementById('current-unit-title');
+    const unitDescEl = document.getElementById('current-unit-description');
+    const unitStatsEl = document.getElementById('current-unit-stats');
+    const unitProgressEl = document.getElementById('current-unit-progress');
+    const unitHeader = document.getElementById('current-unit-header');
     
     if (appData.unit_title) {
-        unitTitle.textContent = appData.unit_title;
-        unitDesc.textContent = appData.unit_description || '';
-        unitStats.textContent = `${totalWords} 詞彙 | ${totalSentences} 句子`;
+        unitHeader.style.display = 'flex';
+        unitTitleEl.textContent = appData.unit_title;
+        unitDescEl.textContent = appData.unit_description || '';
+        unitStatsEl.textContent = `${totalWords} 詞彙 | ${totalSentences} 句子`;
         
         const totalItems = totalWords + totalSentences;
         const totalMastered = masteredWords + masteredSentences;
         const overallMastery = totalItems > 0 ? Math.round((totalMastered / totalItems) * 100) : 0;
         
-        unitProgress.textContent = `掌握度: ${overallMastery}%`;
+        unitProgressEl.textContent = `掌握度: ${overallMastery}%`;
         
         // 更新學習統計中的掌握度
         if (learningStats[currentUnitId]) {
             learningStats[currentUnitId].mastery = overallMastery;
             saveLearningStats();
         }
+    } else {
+        unitHeader.style.display = 'none';
     }
     
     updateUnitStatsDisplay();
@@ -720,6 +739,102 @@ async function loadUnit(unitId) {
     } else {
         document.getElementById('words-grid').innerHTML = '<div class="loading">單元加載失敗，請刷新頁面重試。</div>';
         document.getElementById('sentences-grid').innerHTML = '';
+    }
+}
+
+// 更新單元選擇器（用於上傳後刷新下拉選單）
+function updateUnitSelect() {
+    const unitSelect = document.getElementById('unit-select');
+    const currentValue = unitSelect.value;
+    
+    unitSelect.innerHTML = '';
+    
+    unitsIndex.units.forEach(unit => {
+        const option = document.createElement('option');
+        option.value = unit.id;
+        option.textContent = unit.title;
+        unitSelect.appendChild(option);
+    });
+    
+    if (currentValue && unitsIndex.units.find(u => u.id === currentValue)) {
+        unitSelect.value = currentValue;
+    }
+}
+
+// 顯示通知
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
+}
+
+// 文件上傳處理
+async function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    try {
+        const text = await file.text();
+        const unitData = JSON.parse(text);
+        
+        // 驗證JSON格式
+        if (!unitData.unit_id || !unitData.unit_title || !unitData.words || !unitData.sentences) {
+            throw new Error('無效的單元JSON格式：缺少 unit_id/unit_title/words/sentences');
+        }
+        
+        // 檢查是否已存在相同ID的單元
+        const existingUnitIndex = unitsIndex.units.findIndex(u => u.id === unitData.unit_id);
+        
+        // 創建臨時單元條目
+        const tempUnit = {
+            id: unitData.unit_id,
+            title: unitData.unit_title,
+            description: unitData.unit_description || '自定義上傳單元',
+            words_count: unitData.words.length,
+            sentences_count: unitData.sentences.length,
+            difficulty: unitData.difficulty || 'custom',
+            created: new Date().toISOString().split('T')[0],
+            dataUrl: URL.createObjectURL(file)  // 存儲Blob URL
+        };
+        
+        if (existingUnitIndex !== -1) {
+            // 替換現有單元（同時釋放舊的Blob URL）
+            const oldUnit = unitsIndex.units[existingUnitIndex];
+            if (oldUnit.dataUrl && oldUnit.dataUrl.startsWith('blob:')) {
+                URL.revokeObjectURL(oldUnit.dataUrl);
+            }
+            unitsIndex.units[existingUnitIndex] = tempUnit;
+        } else {
+            // 添加新單元
+            unitsIndex.units.push(tempUnit);
+        }
+        
+        // 更新下拉選單
+        updateUnitSelect();
+        
+        // 加載上傳的單元
+        await loadUnit(tempUnit.id);
+        
+        // 顯示成功消息
+        showNotification('單元上傳成功！', 'success');
+        
+    } catch (error) {
+        console.error('上傳失敗:', error);
+        showNotification('上傳失敗：' + error.message, 'error');
+    } finally {
+        event.target.value = ''; // 清空input
     }
 }
 
@@ -891,6 +1006,7 @@ function showHelp() {
 6. 數據保存：所有進度自動保存在瀏覽器中
 7. 重置功能：可重置當前單元或所有單元
 8. 數據備份：可導出/導入學習數據
+9. 上傳單元：可上載自定義的 JSON 單元檔案
 
 提示：使用耳機或音響可獲得更好的聽力體驗！`);
 }
@@ -902,15 +1018,7 @@ async function initPage() {
     
     if (indexLoaded && unitsIndex.units && unitsIndex.units.length > 0) {
         // 填充單元選擇器
-        const unitSelect = document.getElementById('unit-select');
-        unitSelect.innerHTML = '';
-        
-        unitsIndex.units.forEach(unit => {
-            const option = document.createElement('option');
-            option.value = unit.id;
-            option.textContent = unit.title;
-            unitSelect.appendChild(option);
-        });
+        updateUnitSelect();
         
         // 確定要加載的單元
         let unitToLoad = getUrlParam('unit');
@@ -922,9 +1030,12 @@ async function initPage() {
         await loadUnit(unitToLoad);
         
         // 設置單元選擇器事件
-        unitSelect.addEventListener('change', function() {
+        document.getElementById('unit-select').addEventListener('change', function() {
             loadUnit(this.value);
         });
+        
+        // 添加上傳事件
+        document.getElementById('unit-upload').addEventListener('change', handleFileUpload);
     } else {
         document.getElementById('words-grid').innerHTML = '<div class="loading">無法載入單元列表，請檢查網絡連接。</div>';
         document.getElementById('sentences-grid').innerHTML = '';

@@ -86,33 +86,42 @@
             box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
         }
         
-        .unit-info {
-            background: white;
-            border-radius: 12px;
-            padding: 15px 20px;
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            min-width: 250px;
-        }
-        
-        .unit-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1a365d;
-            margin-bottom: 5px;
-        }
-        
-        .unit-description {
-            font-size: 14px;
-            color: #718096;
-            margin-bottom: 10px;
-        }
-        
-        .unit-meta {
+        /* 上傳按鈕樣式 */
+        .upload-wrapper {
             display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            color: #a0aec0;
+            align-items: center;
+        }
+        
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .upload-btn:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .upload-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .upload-btn i {
+            font-size: 18px;
         }
         
         .stats-container {
@@ -122,6 +131,26 @@
             margin-bottom: 30px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
             border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        
+        .current-unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        
+        .current-unit-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a365d;
+        }
+        
+        .current-unit-desc {
+            font-size: 14px;
+            color: #718096;
         }
         
         .stats-header {
@@ -851,8 +880,13 @@
                 align-items: stretch;
             }
             
-            .unit-selector, .unit-info {
+            .unit-selector {
                 min-width: 100%;
+            }
+            
+            .upload-btn {
+                width: 100%;
+                justify-content: center;
             }
         }
         
@@ -954,6 +988,15 @@
             .action-btn i {
                 font-size: 18px;
             }
+            
+            .upload-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+            
+            .upload-btn i {
+                font-size: 16px;
+            }
         }
         
         .footer {
@@ -984,6 +1027,52 @@
             color: #1a365d;
             text-decoration: underline;
         }
+        
+        /* 通知樣式 */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .notification.success {
+            background: #48bb78;
+        }
+        
+        .notification.error {
+            background: #f56565;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -994,19 +1083,32 @@
             <div class="subtitle">多單元學習平台 | 自動進度追蹤</div>
         </div>
         
+        <!-- 修改後的單元控制欄：包含下拉選單和上傳按鈕 -->
         <div class="unit-controls">
             <div class="unit-selector">
                 <select class="unit-select" id="unit-select">
                     <option value="">載入單元列表中...</option>
                 </select>
             </div>
-            <div class="unit-info">
-                <div class="unit-title" id="current-unit-title">選擇單元開始學習</div>
-                <div class="unit-description" id="current-unit-description"></div>
-                <div class="unit-meta">
-                    <span id="current-unit-stats">0 詞彙 | 0 句子</span>
-                    <span id="current-unit-progress">掌握度: 0%</span>
-                </div>
+            
+            <!-- 上傳按鈕區域 -->
+            <div class="upload-wrapper">
+                <label for="unit-upload" class="upload-btn">
+                    <i class="fas fa-upload"></i> 上傳JSON單元
+                </label>
+                <input type="file" id="unit-upload" accept="application/json, .json" style="display:none;">
+            </div>
+        </div>
+        
+        <!-- 新增加的當前單元標題列（取代原來的 unit-info） -->
+        <div class="current-unit-header" id="current-unit-header" style="display: none;">
+            <div>
+                <span class="current-unit-title" id="current-unit-title"></span>
+                <span class="current-unit-desc" id="current-unit-description"></span>
+            </div>
+            <div>
+                <span id="current-unit-stats"></span>
+                <span id="current-unit-progress"></span>
             </div>
         </div>
         
