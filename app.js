@@ -453,6 +453,14 @@ function updateStats() {
     document.getElementById('mastered-sentences').textContent = masteredSentences;
     document.getElementById('sentences-mastery').textContent = sentencesMastery + '%';
     
+    // === 新增：更新當前單元的掌握度記錄 ===
+    if (learningStats[currentUnitId]) {
+        const totalItems = totalWords + totalSentences;
+        const totalMastered = masteredWords + masteredSentences;
+        learningStats[currentUnitId].mastery = totalItems > 0 ? Math.round((totalMastered / totalItems) * 100) : 0;
+        saveLearningStats(); // 儲存到 localStorage
+    }
+    
     // 更新詳細統計彈窗內容
     updateUnitStatsDisplay();
 }
