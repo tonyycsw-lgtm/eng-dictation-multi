@@ -740,5 +740,624 @@
       "audio": "decide"
     }
   ],
-  "sentences": []
+  "sentences": [
+    {
+      "id": "unit4-sent1",
+      "english": "I liked the alpacas the most. They were so cute!",
+      "translation": "我最喜歡羊駝。它們太可愛了！",
+      "audio": "sentence1"
+    },
+    {
+      "id": "unit4-sent2",
+      "english": "There were rabbits, goats and alpacas at this farm.",
+      "translation": "這個農場裡有兔子、山羊和羊駝。",
+      "audio": "sentence2"
+    },
+    {
+      "id": "unit4-sent3",
+      "english": "Marcus showed his mum a picture of a kitten.",
+      "translation": "馬庫斯給媽媽看了一張小貓的照片。",
+      "audio": "sentence3"
+    },
+    {
+      "id": "unit4-sent4",
+      "english": "Tucker is a chocolate Labradoodle.",
+      "translation": "塔克是一隻巧克力色的拉布拉多貴賓犬。",
+      "audio": "sentence4"
+    },
+    {
+      "id": "unit4-sent5",
+      "english": "A mongrel is a mixed-breed dog.",
+      "translation": "雜交犬是指混合品種的狗。",
+      "audio": "sentence5"
+    },
+    {
+      "id": "unit4-sent6",
+      "english": "There are many stray animals without food or shelter.",
+      "translation": "有許多流浪動物沒有食物和棲身之所。",
+      "audio": "sentence6"
+    },
+    {
+      "id": "unit4-sent7",
+      "english": "He started working as a therapy dog at Independent Schools Foundation Academy in 2019.",
+      "translation": "他於2019年開始在弘立書院擔任治療犬。",
+      "audio": "sentence7"
+    },
+    {
+      "id": "unit4-sent8",
+      "english": "People often prefer pure breeds to mongrels in Hong Kong.",
+      "translation": "在香港，人們常常偏好純種犬多於雜交犬。",
+      "audio": "sentence8"
+    },
+    {
+      "id": "unit4-sent9",
+      "english": "The parrot has very sharp claws, so we need to trim its nails.",
+      "translation": "這隻鸚鵡有非常鋒利的爪子，所以我們需要修剪它的指甲。",
+      "audio": "sentence9"
+    },
+    {
+      "id": "unit4-sent10",
+      "english": "The parrot has beautiful blue feathers.",
+      "translation": "這隻鸚鵡有美麗的藍色羽毛。",
+      "audio": "sentence10"
+    },
+    {
+      "id": "unit4-sent11",
+      "english": "We can see the fin of the fish sticking out of the water.",
+      "translation": "我們可以看到魚的鰭伸出水面。",
+      "audio": "sentence11"
+    },
+    {
+      "id": "unit4-sent12",
+      "english": "These medium-sized animals have very thick and soft fur.",
+      "translation": "這些中型動物有非常濃密柔軟的毛髮。",
+      "audio": "sentence12"
+    },
+    {
+      "id": "unit4-sent13",
+      "english": "The dog hurt its paw when running outside.",
+      "translation": "那隻狗在外面跑的時候弄傷了爪子。",
+      "audio": "sentence13"
+    },
+    {
+      "id": "unit4-sent14",
+      "english": "Fish are covered in small and smooth scales.",
+      "translation": "魚身上覆蓋著細小光滑的鱗片。",
+      "audio": "sentence14"
+    },
+    {
+      "id": "unit4-sent15",
+      "english": "Every time someone pets him, he wags his tail.",
+      "translation": "每次有人撫摸牠，牠都會搖尾巴。",
+      "audio": "sentence15"
+    },
+    {
+      "id": "unit4-sent16",
+      "english": "He has the cutest whiskers on his face!",
+      "translation": "他臉上有最可愛的鬍鬚！",
+      "audio": "sentence16"
+    },
+    {
+      "id": "unit4-sent17",
+      "english": "You can chat with birds and let them fly around with their wings.",
+      "translation": "你可以和鳥兒聊天，讓牠們展翅飛翔。",
+      "audio": "sentence17"
+    },
+    {
+      "id": "unit4-sent18",
+      "english": "He woofs at me when it’s time to get up.",
+      "translation": "到了起床時間，牠就會對我汪汪叫。",
+      "audio": "sentence18"
+    },
+    {
+      "id": "unit4-sent19",
+      "english": "Coco purred contentedly when Marcus brushed its fur.",
+      "translation": "當馬庫斯梳理可可的毛髮時，牠滿足地發出呼嚕聲。",
+      "audio": "sentence19"
+    },
+    {
+      "id": "unit4-sent20",
+      "english": "The dog growled and barked at the robber.",
+      "translation": "那隻狗對著強盜低吼並吠叫。",
+      "audio": "sentence20"
+    },
+    {
+      "id": "unit4-sent21",
+      "english": "I love to hear the cows mooing in the barn.",
+      "translation": "我喜歡聽牛在穀倉裡哞哞叫。",
+      "audio": "sentence21"
+    },
+    {
+      "id": "unit4-sent22",
+      "english": "The pigs always oink when they see me coming.",
+      "translation": "那些豬看到我來的時候總是哼哼叫。",
+      "audio": "sentence22"
+    },
+    {
+      "id": "unit4-sent23",
+      "english": "Their baas cheer me up every morning.",
+      "translation": "牠們的咩咩叫聲每天早上都讓我心情愉快。",
+      "audio": "sentence23"
+    },
+    {
+      "id": "unit4-sent24",
+      "english": "She always miaows when she wants attention.",
+      "translation": "當牠想要關注時，總是喵喵叫。",
+      "audio": "sentence24"
+    },
+    {
+      "id": "unit4-sent25",
+      "english": "I sometimes hear a mouse squeak in the kitchen.",
+      "translation": "我有時聽到廚房裡有老鼠吱吱叫。",
+      "audio": "sentence25"
+    },
+    {
+      "id": "unit4-sent26",
+      "english": "The birds tweet all morning long outside the window.",
+      "translation": "鳥兒在窗外啾啾叫了整個早上。",
+      "audio": "sentence26"
+    },
+    {
+      "id": "unit4-sent27",
+      "english": "'Can we adopt her?' Marcus asked his mum excitedly.",
+      "translation": "「我們可以領養她嗎？」馬庫斯興奮地問媽媽。",
+      "audio": "sentence27"
+    },
+    {
+      "id": "unit4-sent28",
+      "english": "We can foster the cat first, then decide if we adopt her.",
+      "translation": "我們可以先寄養這隻貓，然後再決定是否領養牠。",
+      "audio": "sentence28"
+    },
+    {
+      "id": "unit4-sent29",
+      "english": "Marcus and his parents looked after the cat together.",
+      "translation": "馬庫斯和他的父母一起照顧那隻貓。",
+      "audio": "sentence29"
+    },
+    {
+      "id": "unit4-sent30",
+      "english": "Marcus said while brushing Coco's soft fur.",
+      "translation": "馬庫斯一邊梳理可可柔軟的毛髮一邊說道。",
+      "audio": "sentence30"
+    },
+    {
+      "id": "unit4-sent31",
+      "english": "Remember to trim your dog's nails regularly.",
+      "translation": "記得定期修剪你的狗的指甲。",
+      "audio": "sentence31"
+    },
+    {
+      "id": "unit4-sent32",
+      "english": "In the afternoon, we even fed one of the alpacas.",
+      "translation": "下午，我們甚至餵了其中一隻羊駝。",
+      "audio": "sentence32"
+    },
+    {
+      "id": "unit4-sent33",
+      "english": "Dogs need plenty of exercise every day.",
+      "translation": "狗每天需要大量的運動。",
+      "audio": "sentence33"
+    },
+    {
+      "id": "unit4-sent34",
+      "english": "Never overfeed your pet, or it will become overweight.",
+      "translation": "切勿過度餵食你的寵物，否則牠會過重。",
+      "audio": "sentence34"
+    },
+    {
+      "id": "unit4-sent35",
+      "english": "Students can give Tucker treats when they interact with him.",
+      "translation": "學生與塔克互動時可以給他零食獎勵。",
+      "audio": "sentence35"
+    },
+    {
+      "id": "unit4-sent36",
+      "english": "Students can just cuddle with Tucker when they feel anxious.",
+      "translation": "學生感到焦慮時可以直接擁抱塔克。",
+      "audio": "sentence36"
+    },
+    {
+      "id": "unit4-sent37",
+      "english": "Students can visit Tucker and interact with him at break.",
+      "translation": "學生可以在休息時間探望塔克並與他互動。",
+      "audio": "sentence37"
+    },
+    {
+      "id": "unit4-sent38",
+      "english": "The alpaca kept licking my hand when I fed her.",
+      "translation": "當我餵那隻羊駝時，牠不停地舔我的手。",
+      "audio": "sentence38"
+    },
+    {
+      "id": "unit4-sent39",
+      "english": "Even my youngest brother was tall enough to pet the alpacas.",
+      "translation": "連我最小的弟弟都夠高可以撫摸羊駝。",
+      "audio": "sentence39"
+    },
+    {
+      "id": "unit4-sent40",
+      "english": "If your pet scratches a lot, it may have fleas.",
+      "translation": "如果你的寵物經常抓癢，可能身上有跳蚤。",
+      "audio": "sentence40"
+    },
+    {
+      "id": "unit4-sent41",
+      "english": "Dad and I decided to go to the vet right away.",
+      "translation": "爸爸和我決定立刻去看獸醫。",
+      "audio": "sentence41"
+    },
+    {
+      "id": "unit4-sent42",
+      "english": "My parents promised to visit an animal shelter with me.",
+      "translation": "我的父母答應和我一起去動物收容所。",
+      "audio": "sentence42"
+    },
+    {
+      "id": "unit4-sent43",
+      "english": "Brush your pet's fur to prevent knots.",
+      "translation": "梳理寵物的毛髮以防止打結。",
+      "audio": "sentence43"
+    },
+    {
+      "id": "unit4-sent44",
+      "english": "Give your pet a bath with special shampoo if it has fleas.",
+      "translation": "如果你的寵物有跳蚤，請用特殊洗髮精給牠洗澡。",
+      "audio": "sentence44"
+    },
+    {
+      "id": "unit4-sent45",
+      "english": "Prevent fleas using special sprays or collars.",
+      "translation": "使用特殊噴霧或項圈預防跳蚤。",
+      "audio": "sentence45"
+    },
+    {
+      "id": "unit4-sent46",
+      "english": "We put a soft collar on our new puppy.",
+      "translation": "我們給我們的新小狗戴上了一個柔軟的項圈。",
+      "audio": "sentence46"
+    },
+    {
+      "id": "unit4-sent47",
+      "english": "That was fun, but kind of strange.",
+      "translation": "那很有趣，但有點奇怪。",
+      "audio": "sentence47"
+    },
+    {
+      "id": "unit4-sent48",
+      "english": "Coco purred contentedly while being brushed.",
+      "translation": "可可被梳理時滿足地發出呼嚕聲。",
+      "audio": "sentence48"
+    },
+    {
+      "id": "unit4-sent49",
+      "english": "When students feel anxious, they can visit Tucker.",
+      "translation": "當學生感到焦慮時，他們可以探望塔克。",
+      "audio": "sentence49"
+    },
+    {
+      "id": "unit4-sent50",
+      "english": "Marcus was shy and could not make any friends.",
+      "translation": "馬庫斯很害羞，交不到任何朋友。",
+      "audio": "sentence50"
+    },
+    {
+      "id": "unit4-sent51",
+      "english": "The cat became more confident after living with Marcus.",
+      "translation": "那隻貓和馬庫斯一起生活後變得更有自信。",
+      "audio": "sentence51"
+    },
+    {
+      "id": "unit4-sent52",
+      "english": "The cat in the photo is called Marbles. She was very friendly.",
+      "translation": "照片中的貓叫馬布爾斯。她非常友善。",
+      "audio": "sentence52"
+    },
+    {
+      "id": "unit4-sent53",
+      "english": "The curious kitten kept playing with the ball.",
+      "translation": "那隻好奇的小貓不停地玩球。",
+      "audio": "sentence53"
+    },
+    {
+      "id": "unit4-sent54",
+      "english": "Dogs are cuddly and loving to their owners.",
+      "translation": "狗對主人很親密且充滿愛意。",
+      "audio": "sentence54"
+    },
+    {
+      "id": "unit4-sent55",
+      "english": "These medium-sized animals have very thick and soft fur.",
+      "translation": "這些中型動物有非常濃密柔軟的毛髮。",
+      "audio": "sentence55"
+    },
+    {
+      "id": "unit4-sent56",
+      "english": "He learnt how to be a responsible pet owner along the way.",
+      "translation": "在這過程中，他學會了如何成為一個負責任的寵物主人。",
+      "audio": "sentence56"
+    },
+    {
+      "id": "unit4-sent57",
+      "english": "Tucker is a wonderful companion for many students.",
+      "translation": "塔克是許多學生的絕佳夥伴。",
+      "audio": "sentence57"
+    },
+    {
+      "id": "unit4-sent58",
+      "english": "We got there right when it opened to avoid the crowds.",
+      "translation": "我們在開放時正好到達，以避開人群。",
+      "audio": "sentence58"
+    },
+    {
+      "id": "unit4-sent59",
+      "english": "A memorable experience at Butterfly Valley.",
+      "translation": "在蝴蝶谷的一次難忘經歷。",
+      "audio": "sentence59"
+    },
+    {
+      "id": "unit4-sent60",
+      "english": "If you are up for the challenge, dogs are great pets.",
+      "translation": "如果你準備好接受挑戰，狗是很棒的寵物。",
+      "audio": "sentence60"
+    },
+    {
+      "id": "unit4-sent61",
+      "english": "Tucker is a simple solution to students' difficulties.",
+      "translation": "塔克是學生困難的簡單解決方案。",
+      "audio": "sentence61"
+    },
+    {
+      "id": "unit4-sent62",
+      "english": "They invited friends over to welcome this new family member.",
+      "translation": "他們邀請朋友來家裡歡迎這個新家庭成員。",
+      "audio": "sentence62"
+    },
+    {
+      "id": "unit4-sent63",
+      "english": "We need to avoid busy streets when walking the dogs.",
+      "translation": "我們遛狗時需要避開繁忙的街道。",
+      "audio": "sentence63"
+    },
+    {
+      "id": "unit4-sent64",
+      "english": "Tucker even helped students overcome their fear of dogs.",
+      "translation": "塔克甚至幫助學生克服了對狗的恐懼。",
+      "audio": "sentence64"
+    },
+    {
+      "id": "unit4-sent65",
+      "english": "Max heard the robber and started to bark loudly.",
+      "translation": "麥克斯聽到強盜的聲音，開始大聲吠叫。",
+      "audio": "sentence65"
+    },
+    {
+      "id": "unit4-sent66",
+      "english": "She gets grumpy and bites me in the evenings.",
+      "translation": "牠晚上會變得暴躁並咬我。",
+      "audio": "sentence66"
+    },
+    {
+      "id": "unit4-sent67",
+      "english": "We bought a new toy for our dog at Christmas.",
+      "translation": "我們在聖誕節給我們的狗買了一個新玩具。",
+      "audio": "sentence67"
+    },
+    {
+      "id": "unit4-sent68",
+      "english": "A German shepherd stopped a robbery on Saturday night.",
+      "translation": "一隻德國牧羊犬在週六晚上阻止了一場搶劫。",
+      "audio": "sentence68"
+    },
+    {
+      "id": "unit4-sent69",
+      "english": "At ten years old, I got my first pet.",
+      "translation": "十歲時，我得到了我的第一隻寵物。",
+      "audio": "sentence69"
+    },
+    {
+      "id": "unit4-sent70",
+      "english": "I was really shocked at that moment.",
+      "translation": "在那一刻，我真的很震驚。",
+      "audio": "sentence70"
+    },
+    {
+      "id": "unit4-sent71",
+      "english": "On 1 February, we visited an animal shelter.",
+      "translation": "2月1日，我們參觀了動物收容所。",
+      "audio": "sentence71"
+    },
+    {
+      "id": "unit4-sent72",
+      "english": "I taught my dog a new trick on Christmas Day.",
+      "translation": "我在聖誕節當天教了我的狗一個新把戲。",
+      "audio": "sentence72"
+    },
+    {
+      "id": "unit4-sent73",
+      "english": "In the afternoon, we even fed one of the alpacas.",
+      "translation": "下午，我們甚至餵了其中一隻羊駝。",
+      "audio": "sentence73"
+    },
+    {
+      "id": "unit4-sent74",
+      "english": "In 2019, Tucker started working as a therapy dog.",
+      "translation": "2019年，塔克開始擔任治療犬。",
+      "audio": "sentence74"
+    },
+    {
+      "id": "unit4-sent75",
+      "english": "We stayed there from 10 a.m. to 2 p.m.",
+      "translation": "我們從上午10點到下午2點待在那裡。",
+      "audio": "sentence75"
+    },
+    {
+      "id": "unit4-sent76",
+      "english": "Between June and August, I taught my rabbit a new trick.",
+      "translation": "六月到八月之間，我教了我的兔子一個新把戲。",
+      "audio": "sentence76"
+    },
+    {
+      "id": "unit4-sent77",
+      "english": "In the beginning, the student was scared to go near Tucker.",
+      "translation": "一開始，那個學生害怕靠近塔克。",
+      "audio": "sentence77"
+    },
+    {
+      "id": "unit4-sent78",
+      "english": "In the end, we found the hamster under the bed.",
+      "translation": "最後，我們在床底下找到了倉鼠。",
+      "audio": "sentence78"
+    },
+    {
+      "id": "unit4-sent79",
+      "english": "A while later, Marcus noticed the cat was missing.",
+      "translation": "過了一會兒，馬庫斯發現貓不見了。",
+      "audio": "sentence79"
+    },
+    {
+      "id": "unit4-sent80",
+      "english": "One day, Marcus showed his mum a picture of a kitten.",
+      "translation": "有一天，馬庫斯給媽媽看了一張小貓的照片。",
+      "audio": "sentence80"
+    },
+    {
+      "id": "unit4-sent81",
+      "english": "It happened suddenly that my cat got sick.",
+      "translation": "突然間，我的貓就生病了。",
+      "audio": "sentence81"
+    },
+    {
+      "id": "unit4-sent82",
+      "english": "As a result, many mongrels end up on the street.",
+      "translation": "結果，許多雜交犬最終流落街頭。",
+      "audio": "sentence82"
+    },
+    {
+      "id": "unit4-sent83",
+      "english": "Petting a dog can help people feel calmer and more relaxed.",
+      "translation": "撫摸狗可以幫助人們感到更平靜和放鬆。",
+      "audio": "sentence83"
+    },
+    {
+      "id": "unit4-sent84",
+      "english": "Students feel more relaxed after interacting with Tucker.",
+      "translation": "學生與塔克互動後感到更放鬆。",
+      "audio": "sentence84"
+    },
+    {
+      "id": "unit4-sent85",
+      "english": "With a therapy dog around, students seem less stressed.",
+      "translation": "有治療犬在身邊，學生們似乎壓力較小。",
+      "audio": "sentence85"
+    },
+    {
+      "id": "unit4-sent86",
+      "english": "I was quite scared, but my dog was not afraid at all.",
+      "translation": "我很害怕，但我的狗一點也不怕。",
+      "audio": "sentence86"
+    },
+    {
+      "id": "unit4-sent87",
+      "english": "I was really shocked when the turtle bit my finger.",
+      "translation": "當烏龜咬我的手指時，我真的很震驚。",
+      "audio": "sentence87"
+    },
+    {
+      "id": "unit4-sent88",
+      "english": "His parents were worried because he had no friends.",
+      "translation": "他的父母很擔心，因為他沒有朋友。",
+      "audio": "sentence88"
+    },
+    {
+      "id": "unit4-sent89",
+      "english": "'Can we adopt her?' he asked excitedly.",
+      "translation": "「我們可以領養她嗎？」他興奮地問。",
+      "audio": "sentence89"
+    },
+    {
+      "id": "unit4-sent90",
+      "english": "I feel lonely at home as the only child.",
+      "translation": "作為獨生子，我在家感到孤獨。",
+      "audio": "sentence90"
+    },
+    {
+      "id": "unit4-sent91",
+      "english": "She gets grumpy and bites me in the evenings.",
+      "translation": "牠晚上會變得暴躁並咬我。",
+      "audio": "sentence91"
+    },
+    {
+      "id": "unit4-sent92",
+      "english": "Therapy dogs give emotional support to students by providing comfort.",
+      "translation": "治療犬通過提供安慰給學生情感支持。",
+      "audio": "sentence92"
+    },
+    {
+      "id": "unit4-sent93",
+      "english": "Many students deal with exam worries and social challenges.",
+      "translation": "許多學生應對考試焦慮和社交挑戰。",
+      "audio": "sentence93"
+    },
+    {
+      "id": "unit4-sent94",
+      "english": "Therapy dogs provide comfort and emotional support to students.",
+      "translation": "治療犬為學生提供安慰和情感支持。",
+      "audio": "sentence94"
+    },
+    {
+      "id": "unit4-sent95",
+      "english": "Their baas cheer me up every morning.",
+      "translation": "牠們的咩咩叫聲每天早上都讓我心情愉快。",
+      "audio": "sentence95"
+    },
+    {
+      "id": "unit4-sent96",
+      "english": "I even checked on her a few times during the night.",
+      "translation": "我甚至在夜裡查看過牠幾次。",
+      "audio": "sentence96"
+    },
+    {
+      "id": "unit4-sent97",
+      "english": "The loud barking woke up the owner of the house.",
+      "translation": "大聲的吠叫吵醒了房子的主人。",
+      "audio": "sentence97"
+    },
+    {
+      "id": "unit4-sent98",
+      "english": "A robber broke into a house and wanted to steal money.",
+      "translation": "一個強盜闖入一間房子想要偷錢。",
+      "audio": "sentence98"
+    },
+    {
+      "id": "unit4-sent99",
+      "english": "The robber ran away when he heard the dog barking.",
+      "translation": "強盜聽到狗叫聲就逃跑了。",
+      "audio": "sentence99"
+    },
+    {
+      "id": "unit4-sent100",
+      "english": "He shared photos of the small orange cat on social media.",
+      "translation": "他在社交媒體上分享了那隻小橘貓的照片。",
+      "audio": "sentence100"
+    },
+    {
+      "id": "unit4-sent101",
+      "english": "They invited a few of Marcus' friends over for a party.",
+      "translation": "他們邀請了馬庫斯的幾個朋友來參加派對。",
+      "audio": "sentence101"
+    },
+    {
+      "id": "unit4-sent102",
+      "english": "They finally promised to visit an animal shelter with me.",
+      "translation": "他們終於答應和我一起去動物收容所。",
+      "audio": "sentence102"
+    },
+    {
+      "id": "unit4-sent103",
+      "english": "In November, the family decided to adopt the cat.",
+      "translation": "十一月，這家人決定領養那隻貓。",
+      "audio": "sentence103"
+    }
+  ]
 }
