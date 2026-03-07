@@ -1,0 +1,744 @@
+{
+  "unit_id": "unit4",
+  "unit_title": "Unit 4: All about Pets",
+  "unit_description": "核心詞彙：寵物、照護、情感與語篇連接",
+  "difficulty": "intermediate",
+  "words": [
+    {
+      "id": "unit4-word1",
+      "english": "alpaca",
+      "translation": "羊駝",
+      "hint": "I liked the alpacas the most. They were so cute!",
+      "audio": "alpaca"
+    },
+    {
+      "id": "unit4-word2",
+      "english": "rabbit",
+      "translation": "兔子",
+      "hint": "There were rabbits, goats and alpacas at this farm.",
+      "audio": "rabbit"
+    },
+    {
+      "id": "unit4-word3",
+      "english": "goat",
+      "translation": "山羊",
+      "hint": "There were rabbits, goats and alpacas at this farm.",
+      "audio": "goat"
+    },
+    {
+      "id": "unit4-word4",
+      "english": "kitten",
+      "translation": "小貓",
+      "hint": "Marcus showed his mum a picture of a kitten.",
+      "audio": "kitten"
+    },
+    {
+      "id": "unit4-word5",
+      "english": "Labradoodle",
+      "translation": "拉布拉多貴賓犬",
+      "hint": "Tucker is a chocolate Labradoodle.",
+      "audio": "Labradoodle"
+    },
+    {
+      "id": "unit4-word6",
+      "english": "mongrel",
+      "translation": "雜交犬/土狗",
+      "hint": "A mongrel is a mixed-breed dog.",
+      "audio": "mongrel"
+    },
+    {
+      "id": "unit4-word7",
+      "english": "stray animal",
+      "translation": "流浪動物",
+      "hint": "There are many stray animals without food or shelter.",
+      "audio": "stray animal"
+    },
+    {
+      "id": "unit4-word8",
+      "english": "therapy dog",
+      "translation": "治療犬",
+      "hint": "He started working as a therapy dog at Independent Schools Foundation Academy in 2019.",
+      "audio": "therapy dog"
+    },
+    {
+      "id": "unit4-word9",
+      "english": "pure breed",
+      "translation": "純種犬",
+      "hint": "People often prefer pure breeds to mongrels in Hong Kong.",
+      "audio": "pure breed"
+    },
+    {
+      "id": "unit4-word10",
+      "english": "beak",
+      "translation": "鳥喙",
+      "hint": "Label the beak of the bird in the photo.",
+      "audio": "beak"
+    },
+    {
+      "id": "unit4-word11",
+      "english": "claw",
+      "translation": "爪子",
+      "hint": "The parrot has very sharp claws, so we need to trim its nails.",
+      "audio": "claw"
+    },
+    {
+      "id": "unit4-word12",
+      "english": "feather",
+      "translation": "羽毛",
+      "hint": "The parrot has beautiful blue feathers.",
+      "audio": "feather"
+    },
+    {
+      "id": "unit4-word13",
+      "english": "fin",
+      "translation": "魚鰭",
+      "hint": "We can see the fin of the fish sticking out of the water.",
+      "audio": "fin"
+    },
+    {
+      "id": "unit4-word14",
+      "english": "fur",
+      "translation": "毛髮",
+      "hint": "These medium-sized animals have very thick and soft fur.",
+      "audio": "fur"
+    },
+    {
+      "id": "unit4-word15",
+      "english": "paw",
+      "translation": "爪子/肉墊",
+      "hint": "The dog hurt its paw when running outside.",
+      "audio": "paw"
+    },
+    {
+      "id": "unit4-word16",
+      "english": "scale",
+      "translation": "鱗片",
+      "hint": "Fish are covered in small and smooth scales.",
+      "audio": "scale"
+    },
+    {
+      "id": "unit4-word17",
+      "english": "tail",
+      "translation": "尾巴",
+      "hint": "Every time someone pets him, he wags his tail.",
+      "audio": "tail"
+    },
+    {
+      "id": "unit4-word18",
+      "english": "whisker",
+      "translation": "鬍鬚",
+      "hint": "He has the cutest whiskers on his face!",
+      "audio": "whisker"
+    },
+    {
+      "id": "unit4-word19",
+      "english": "wing",
+      "translation": "翅膀",
+      "hint": "You can chat with birds and let them fly around with their wings.",
+      "audio": "wing"
+    },
+    {
+      "id": "unit4-word20",
+      "english": "woof",
+      "translation": "汪汪叫",
+      "hint": "He woofs at me when it’s time to get up.",
+      "audio": "woof"
+    },
+    {
+      "id": "unit4-word21",
+      "english": "purr",
+      "translation": "呼嚕聲",
+      "hint": "Coco purred contentedly when Marcus brushed its fur.",
+      "audio": "purr"
+    },
+    {
+      "id": "unit4-word22",
+      "english": "growl",
+      "translation": "低吼",
+      "hint": "The dog growled and barked at the robber.",
+      "audio": "growl"
+    },
+    {
+      "id": "unit4-word23",
+      "english": "moo",
+      "translation": "哞哞叫",
+      "hint": "I love to hear the cows mooing in the barn.",
+      "audio": "moo"
+    },
+    {
+      "id": "unit4-word24",
+      "english": "oink",
+      "translation": "哼哼叫",
+      "hint": "The pigs always oink when they see me coming.",
+      "audio": "oink"
+    },
+    {
+      "id": "unit4-word25",
+      "english": "baa",
+      "translation": "咩咩叫",
+      "hint": "Their baas cheer me up every morning.",
+      "audio": "baa"
+    },
+    {
+      "id": "unit4-word26",
+      "english": "miaow",
+      "translation": "喵喵叫",
+      "hint": "She always miaows when she wants attention.",
+      "audio": "miaow"
+    },
+    {
+      "id": "unit4-word27",
+      "english": "squeak",
+      "translation": "吱吱叫",
+      "hint": "I sometimes hear a mouse squeak in the kitchen.",
+      "audio": "squeak"
+    },
+    {
+      "id": "unit4-word28",
+      "english": "tweet",
+      "translation": "啾啾叫",
+      "hint": "The birds tweet all morning long outside the window.",
+      "audio": "tweet"
+    },
+    {
+      "id": "unit4-word29",
+      "english": "adopt",
+      "translation": "領養",
+      "hint": "‘Can we adopt her?’ Marcus asked his mum excitedly.",
+      "audio": "adopt"
+    },
+    {
+      "id": "unit4-word30",
+      "english": "foster",
+      "translation": "寄養",
+      "hint": "We can foster the cat first, then decide if we adopt her.",
+      "audio": "foster"
+    },
+    {
+      "id": "unit4-word31",
+      "english": "look after",
+      "translation": "照顧",
+      "hint": "Marcus and his parents looked after the cat together.",
+      "audio": "look after"
+    },
+    {
+      "id": "unit4-word32",
+      "english": "brush",
+      "translation": "梳理",
+      "hint": "Marcus said while brushing Coco’s soft fur.",
+      "audio": "brush"
+    },
+    {
+      "id": "unit4-word33",
+      "english": "trim",
+      "translation": "修剪",
+      "hint": "Remember to trim your dog’s nails regularly.",
+      "audio": "trim"
+    },
+    {
+      "id": "unit4-word34",
+      "english": "feed",
+      "translation": "餵食",
+      "hint": "In the afternoon, we even fed one of the alpacas.",
+      "audio": "feed"
+    },
+    {
+      "id": "unit4-word35",
+      "english": "exercise",
+      "translation": "運動/鍛煉",
+      "hint": "Dogs need plenty of exercise every day.",
+      "audio": "exercise"
+    },
+    {
+      "id": "unit4-word36",
+      "english": "overfeed",
+      "translation": "過度餵食",
+      "hint": "Never overfeed your pet, or it will become overweight.",
+      "audio": "overfeed"
+    },
+    {
+      "id": "unit4-word37",
+      "english": "treat",
+      "translation": "零食/獎勵",
+      "hint": "Students can give Tucker treats when they interact with him.",
+      "audio": "treat"
+    },
+    {
+      "id": "unit4-word38",
+      "english": "cuddle",
+      "translation": "擁抱",
+      "hint": "Students can just cuddle with Tucker when they feel anxious.",
+      "audio": "cuddle"
+    },
+    {
+      "id": "unit4-word39",
+      "english": "interact",
+      "translation": "互動",
+      "hint": "Students can visit Tucker and interact with him at break.",
+      "audio": "interact"
+    },
+    {
+      "id": "unit4-word40",
+      "english": "lick",
+      "translation": "舔",
+      "hint": "The alpaca kept licking my hand when I fed her.",
+      "audio": "lick"
+    },
+    {
+      "id": "unit4-word41",
+      "english": "pet",
+      "translation": "撫摸",
+      "hint": "Even my youngest brother was tall enough to pet the alpacas.",
+      "audio": "pet"
+    },
+    {
+      "id": "unit4-word42",
+      "english": "flea",
+      "translation": "跳蚤",
+      "hint": "If your pet scratches a lot, it may have fleas.",
+      "audio": "flea"
+    },
+    {
+      "id": "unit4-word43",
+      "english": "vet",
+      "translation": "獸醫",
+      "hint": "Dad and I decided to go to the vet right away.",
+      "audio": "vet"
+    },
+    {
+      "id": "unit4-word44",
+      "english": "shelter",
+      "translation": "動物收容所",
+      "hint": "My parents promised to visit an animal shelter with me.",
+      "audio": "shelter"
+    },
+    {
+      "id": "unit4-word45",
+      "english": "knot",
+      "translation": "毛結",
+      "hint": "Brush your pet’s fur to prevent knots.",
+      "audio": "knot"
+    },
+    {
+      "id": "unit4-word46",
+      "english": "bath",
+      "translation": "洗澡",
+      "hint": "Give your pet a bath with special shampoo if it has fleas.",
+      "audio": "bath"
+    },
+    {
+      "id": "unit4-word47",
+      "english": "spray",
+      "translation": "噴霧",
+      "hint": "Prevent fleas using special sprays or collars.",
+      "audio": "spray"
+    },
+    {
+      "id": "unit4-word48",
+      "english": "collar",
+      "translation": "項圈",
+      "hint": "We put a soft collar on our new puppy.",
+      "audio": "collar"
+    },
+    {
+      "id": "unit4-word49",
+      "english": "strange",
+      "translation": "奇特的",
+      "hint": "That was fun, but kind of strange.",
+      "audio": "strange"
+    },
+    {
+      "id": "unit4-word50",
+      "english": "contentedly",
+      "translation": "滿意地",
+      "hint": "Coco purred contentedly while being brushed.",
+      "audio": "contentedly"
+    },
+    {
+      "id": "unit4-word51",
+      "english": "anxious",
+      "translation": "焦慮的",
+      "hint": "When students feel anxious, they can visit Tucker.",
+      "audio": "anxious"
+    },
+    {
+      "id": "unit4-word52",
+      "english": "shy",
+      "translation": "害羞的",
+      "hint": "Marcus was shy and could not make any friends.",
+      "audio": "shy"
+    },
+    {
+      "id": "unit4-word53",
+      "english": "confident",
+      "translation": "自信的",
+      "hint": "The cat became more confident after living with Marcus.",
+      "audio": "confident"
+    },
+    {
+      "id": "unit4-word54",
+      "english": "friendly",
+      "translation": "友善的",
+      "hint": "The cat in the photo is called Marbles. She was very friendly.",
+      "audio": "friendly"
+    },
+    {
+      "id": "unit4-word55",
+      "english": "curious",
+      "translation": "好奇的",
+      "hint": "The curious kitten kept playing with the ball.",
+      "audio": "curious"
+    },
+    {
+      "id": "unit4-word56",
+      "english": "cuddly",
+      "translation": "毛茸茸的",
+      "hint": "Dogs are cuddly and loving to their owners.",
+      "audio": "cuddly"
+    },
+    {
+      "id": "unit4-word57",
+      "english": "medium-sized",
+      "translation": "中型的",
+      "hint": "These medium-sized animals have very thick and soft fur.",
+      "audio": "medium-sized"
+    },
+    {
+      "id": "unit4-word58",
+      "english": "responsible",
+      "translation": "有責任感的",
+      "hint": "He learnt how to be a responsible pet owner along the way.",
+      "audio": "responsible"
+    },
+    {
+      "id": "unit4-word59",
+      "english": "companion",
+      "translation": "夥伴",
+      "hint": "Tucker is a wonderful companion for many students.",
+      "audio": "companion"
+    },
+    {
+      "id": "unit4-word60",
+      "english": "crowd",
+      "translation": "人群",
+      "hint": "We got there right when it opened to avoid the crowds.",
+      "audio": "crowd"
+    },
+    {
+      "id": "unit4-word61",
+      "english": "experience",
+      "translation": "經歷",
+      "hint": "A memorable experience at Butterfly Valley.",
+      "audio": "experience"
+    },
+    {
+      "id": "unit4-word62",
+      "english": "challenge",
+      "translation": "挑戰",
+      "hint": "If you are up for the challenge, dogs are great pets.",
+      "audio": "challenge"
+    },
+    {
+      "id": "unit4-word63",
+      "english": "solution",
+      "translation": "解決辦法",
+      "hint": "Tucker is a simple solution to students’ difficulties.",
+      "audio": "solution"
+    },
+    {
+      "id": "unit4-word64",
+      "english": "welcome",
+      "translation": "歡迎",
+      "hint": "They invited friends over to welcome this new family member.",
+      "audio": "welcome"
+    },
+    {
+      "id": "unit4-word65",
+      "english": "avoid",
+      "translation": "避免",
+      "hint": "We need to avoid busy streets when walking the dogs.",
+      "audio": "avoid"
+    },
+    {
+      "id": "unit4-word66",
+      "english": "overcome",
+      "translation": "克服",
+      "hint": "Tucker even helped students overcome their fear of dogs.",
+      "audio": "overcome"
+    },
+    {
+      "id": "unit4-word67",
+      "english": "bark",
+      "translation": "吠叫",
+      "hint": "Max heard the robber and started to bark loudly.",
+      "audio": "bark"
+    },
+    {
+      "id": "unit4-word68",
+      "english": "bite",
+      "translation": "咬",
+      "hint": "She gets grumpy and bites me in the evenings.",
+      "audio": "bite"
+    },
+    {
+      "id": "unit4-word69",
+      "english": "at Christmas",
+      "translation": "在聖誕節",
+      "hint": "We bought a new toy for our dog at Christmas.",
+      "audio": "at Christmas"
+    },
+    {
+      "id": "unit4-word70",
+      "english": "at the weekend",
+      "translation": "在周末",
+      "hint": "A German shepherd stopped a robbery on Saturday night.",
+      "audio": "at the weekend"
+    },
+    {
+      "id": "unit4-word71",
+      "english": "at the age of",
+      "translation": "在……歲時",
+      "hint": "At ten years old, I got my first pet.",
+      "audio": "at the age of"
+    },
+    {
+      "id": "unit4-word72",
+      "english": "at that moment",
+      "translation": "在那一刻",
+      "hint": "I was really shocked at that moment.",
+      "audio": "at that moment"
+    },
+    {
+      "id": "unit4-word73",
+      "english": "on Monday",
+      "translation": "在周一",
+      "hint": "On 1 February, we visited an animal shelter.",
+      "audio": "on Monday"
+    },
+    {
+      "id": "unit4-word74",
+      "english": "on Christmas Day",
+      "translation": "在聖誕節當天",
+      "hint": "I taught my dog a new trick on Christmas Day.",
+      "audio": "on Christmas Day"
+    },
+    {
+      "id": "unit4-word75",
+      "english": "in the morning",
+      "translation": "在早上",
+      "hint": "In the afternoon, we even fed one of the alpacas.",
+      "audio": "in the morning"
+    },
+    {
+      "id": "unit4-word76",
+      "english": "in September",
+      "translation": "在九月",
+      "hint": "In 2019, Tucker started working as a therapy dog.",
+      "audio": "in September"
+    },
+    {
+      "id": "unit4-word77",
+      "english": "from … to …",
+      "translation": "從……到……",
+      "hint": "We stayed there from 10 a.m. to 2 p.m.",
+      "audio": "from to"
+    },
+    {
+      "id": "unit4-word78",
+      "english": "between … and …",
+      "translation": "在……和……之間",
+      "hint": "Between June and August, I taught my rabbit a new trick.",
+      "audio": "between and"
+    },
+    {
+      "id": "unit4-word79",
+      "english": "in the beginning",
+      "translation": "一開始",
+      "hint": "In the beginning, the student was scared to go near Tucker.",
+      "audio": "in the beginning"
+    },
+    {
+      "id": "unit4-word80",
+      "english": "in the end",
+      "translation": "最後",
+      "hint": "In the end, we found the hamster under the bed.",
+      "audio": "in the end"
+    },
+    {
+      "id": "unit4-word81",
+      "english": "a while later",
+      "translation": "過了一會兒",
+      "hint": "A while later, Marcus noticed the cat was missing.",
+      "audio": "a while later"
+    },
+    {
+      "id": "unit4-word82",
+      "english": "one day",
+      "translation": "有一天",
+      "hint": "One day, Marcus showed his mum a picture of a kitten.",
+      "audio": "one day"
+    },
+    {
+      "id": "unit4-word83",
+      "english": "suddenly",
+      "translation": "突然地",
+      "hint": "It happened suddenly that my cat got sick.",
+      "audio": "suddenly"
+    },
+    {
+      "id": "unit4-word84",
+      "english": "as a result",
+      "translation": "因此",
+      "hint": "As a result, many mongrels end up on the street.",
+      "audio": "as a result"
+    },
+    {
+      "id": "unit4-word85",
+      "english": "calm",
+      "translation": "平靜的",
+      "hint": "Petting a dog can help people feel calmer and more relaxed.",
+      "audio": "calm"
+    },
+    {
+      "id": "unit4-word86",
+      "english": "relaxed",
+      "translation": "放鬆的",
+      "hint": "Students feel more relaxed after interacting with Tucker.",
+      "audio": "relaxed"
+    },
+    {
+      "id": "unit4-word87",
+      "english": "stressed",
+      "translation": "有壓力的",
+      "hint": "With a therapy dog around, students seem less stressed.",
+      "audio": "stressed"
+    },
+    {
+      "id": "unit4-word88",
+      "english": "scared",
+      "translation": "害怕的",
+      "hint": "I was quite scared, but my dog was not afraid at all.",
+      "audio": "scared"
+    },
+    {
+      "id": "unit4-word89",
+      "english": "shocked",
+      "translation": "震驚的",
+      "hint": "I was really shocked when the turtle bit my finger.",
+      "audio": "shocked"
+    },
+    {
+      "id": "unit4-word90",
+      "english": "worried",
+      "translation": "擔心的",
+      "hint": "His parents were worried because he had no friends.",
+      "audio": "worried"
+    },
+    {
+      "id": "unit4-word91",
+      "english": "excited",
+      "translation": "興奮的",
+      "hint": "‘Can we adopt her?’ he asked excitedly.",
+      "audio": "excited"
+    },
+    {
+      "id": "unit4-word92",
+      "english": "lonely",
+      "translation": "孤獨的",
+      "hint": "I feel lonely at home as the only child.",
+      "audio": "lonely"
+    },
+    {
+      "id": "unit4-word93",
+      "english": "grumpy",
+      "translation": "脾氣暴躁的",
+      "hint": "She gets grumpy and bites me in the evenings.",
+      "audio": "grumpy"
+    },
+    {
+      "id": "unit4-word94",
+      "english": "emotional support",
+      "translation": "情緒支持",
+      "hint": "Therapy dogs give emotional support to students by providing comfort.",
+      "audio": "emotional support"
+    },
+    {
+      "id": "unit4-word95",
+      "english": "deal with",
+      "translation": "處理；應對",
+      "hint": "Many students deal with exam worries and social challenges.",
+      "audio": "deal with"
+    },
+    {
+      "id": "unit4-word96",
+      "english": "provide",
+      "translation": "提供",
+      "hint": "Therapy dogs provide comfort and emotional support to students.",
+      "audio": "provide"
+    },
+    {
+      "id": "unit4-word97",
+      "english": "cheer up",
+      "translation": "使開心",
+      "hint": "Their baas cheer me up every morning.",
+      "audio": "cheer up"
+    },
+    {
+      "id": "unit4-word98",
+      "english": "check on",
+      "translation": "查看",
+      "hint": "I even checked on her a few times during the night.",
+      "audio": "check on"
+    },
+    {
+      "id": "unit4-word99",
+      "english": "wake up",
+      "translation": "醒來",
+      "hint": "The loud barking woke up the owner of the house.",
+      "audio": "wake up"
+    },
+    {
+      "id": "unit4-word100",
+      "english": "break into",
+      "translation": "闖入",
+      "hint": "A robber broke into a house and wanted to steal money.",
+      "audio": "break into"
+    },
+    {
+      "id": "unit4-word101",
+      "english": "run away",
+      "translation": "逃跑",
+      "hint": "The robber ran away when he heard the dog barking.",
+      "audio": "run away"
+    },
+    {
+      "id": "unit4-word102",
+      "english": "share",
+      "translation": "分享",
+      "hint": "He shared photos of the small orange cat on social media.",
+      "audio": "share"
+    },
+    {
+      "id": "unit4-word103",
+      "english": "invite",
+      "translation": "邀請",
+      "hint": "They invited a few of Marcus’ friends over for a party.",
+      "audio": "invite"
+    },
+    {
+      "id": "unit4-word104",
+      "english": "promise",
+      "translation": "承諾",
+      "hint": "They finally promised to visit an animal shelter with me.",
+      "audio": "promise"
+    },
+    {
+      "id": "unit4-word105",
+      "english": "decide",
+      "translation": "決定",
+      "hint": "In November, the family decided to adopt the cat.",
+      "audio": "decide"
+    }
+  ],
+  "sentences": []
+}
